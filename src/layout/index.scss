@@ -1,0 +1,74 @@
+body{
+  min-width: 1150px;
+  overflow-y: hidden;
+}
+
+.wrapper {
+  display: flex;
+  height: calc(100vh - 70px);
+}
+
+article {
+  width: 100%;
+  overflow: auto;
+  height: inherit;
+  @include themify($themes) {
+    background-color: themed("main-background");
+  }
+}
+
+section {
+  padding: 10px;
+}
+
+/* antd UI修改 */
+
+.ant-back-top{
+  right: 20px;
+}
+
+.ant-card {
+  @include themify($themes) {
+    background-color: themed("card-background");
+    color: themed("card-font");
+    border: 1px solid themed("card-border");
+  }
+}
+
+.ant-card-body{
+    font-size: 16px;
+}
+
+.ant-progress-text {
+  @include themify($themes) {
+    color: themed("card-font");
+  }
+}
+
+.ant-card-head-title {
+  @include themify($themes) {
+    color: themed("card-font");
+  }
+}
+
+.ant-table-thead > tr > th {
+  @include themify($themes) {
+    background-color: themed("card-background");
+    color: themed("card-font");
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.ant-table table {
+  @include themify($themes) {
+    background-color: themed("card-background");
+    color: themed("card-font");
+  }
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  @include themify($themes) {
+    background-color: themed("main-background");
+  }
+}

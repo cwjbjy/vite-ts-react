@@ -1,0 +1,104 @@
+.Menu {
+  @include themify($themes) {
+    background-color: themed('aside-background');
+    color: themed('font-color');
+  }
+}
+
+aside {
+  @include themify($themes) {
+    background-color: themed('aside-background');
+  }
+}
+
+.ant-menu-item {
+  display: flex !important;
+  align-items: center;
+}
+
+.ant-menu-submenu-title {
+  display: flex !important;
+  align-items: center;
+}
+
+/* 菜单样式 */
+
+.ant-menu-item {
+  @include themify($themes) {
+    background-color: themed('aside-background');
+    color: themed('font-color');
+  }
+  &:hover {
+    color: rgb(255, 208, 75) !important;
+  }
+}
+
+.ant-menu-item:active {
+  @include themify($themes) {
+    background-color: themed('menu-select') !important;
+  }
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  @include themify($themes) {
+    background-color: themed('menu-select');
+    color: themed('font-color');
+  }
+  > span {
+    > a {
+      @include themify($themes) {
+        background-color: themed('menu-select');
+      }
+    }
+  }
+  > a {
+    @include themify($themes) {
+      background-color: themed('menu-select');
+    }
+  }
+}
+
+.ant-menu-item-selected,
+.ant-menu-item-selected:hover {
+  color: rgb(255, 208, 75) !important;
+}
+
+/* 多级菜单样式 */
+
+.ant-menu-submenu-expand-icon,
+.ant-menu-submenu-arrow {
+  color: #909399 !important;
+}
+
+.ant-menu-submenu > .ant-menu {
+  @include themify($themes) {
+    background-color: themed('aside-background');
+  }
+}
+
+.ant-menu-submenu-title {
+  > span {
+    margin-left: 10px;
+  }
+  &:hover {
+    color: #fff !important;
+  }
+  &:active {
+    @include themify($themes) {
+      background-color: themed('menu-select') !important;
+    }
+  }
+}
+
+.ant-menu-submenu-selected {
+  color: #fff !important;
+  &:hover {
+    color: #fff !important;
+  }
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border-right: none !important;
+}

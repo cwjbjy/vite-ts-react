@@ -1,0 +1,10 @@
+{
+  "Welcome to React": "458",
+  "btn": "Switch Chinese",
+  "title": "Technology Stack：React,React-Router-Dom,Zustand,AntD,Echarts,Gojs,Nodejs,Nginx,MySQL",
+  "title1": "Product Presentation",
+  "p1": "Authority management: Administrators can see the backstage management page, modify their passwords and ordinary users to operate",
+  "p2": "Drag and drop functionality:Drag - and - drop list options, drag - and - drop simulation box",
+  "p3": "Toggle theme colors: Set the theme color to the left of the top image",
+  "p4": "Using antd-grid layout and Flex layout to achieve screen adaptation"
+}

@@ -1,0 +1,9 @@
+.fleetLine {
+    @include themify($themes) {
+      background-color: themed("fleet-bg");
+    }
+    .myChart {
+        width: 100%;
+        height: calc(100vh - 70px);
+      }
+  }
