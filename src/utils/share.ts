@@ -35,6 +35,11 @@ export function getTime() {
   );
 }
 
+//引入静态资源
+export const getAssetsFile = (url: string) => {
+  return new URL(`../assets/images/${url}`, import.meta.url).href;
+};
+
 //生产随机用户名
 export const randomName = (prefix = '', randomLength = 7) => {
   // 设置随机用户名
@@ -100,10 +105,11 @@ export const isValidKey = function <T extends object, K extends keyof T>(obj: T,
 
 //防抖
 export const debounce = (handler: () => void, time: number) => {
-  let timer: NodeJS.Timer;
+  let timer: string | number | NodeJS.Timeout | undefined;
   return function () {
     clearTimeout(timer);
     timer = setTimeout(() => {
+      // @ts-ignore
       handler.call(this);
     }, time);
   };

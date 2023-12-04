@@ -5,7 +5,7 @@ import { useRequest } from 'ahooks';
 import { Form, Input, message } from 'antd';
 import CryptoJS from 'crypto-es';
 
-import { getTime } from '@/utils/share';
+import { getTime, randomName } from '@/utils/share';
 
 import { register } from '@/apis/user';
 
@@ -20,8 +20,11 @@ interface Props {
   onRegister: (params: UserInfo) => void;
 }
 
-const icon = {
-  color: '#c0c4cc',
+const initialUserInfo = {
+  reg_name: randomName('游客'),
+  rge_pass: '',
+  rge_passAgain: '',
+  authCode: '',
 };
 
 const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) {
@@ -78,7 +81,7 @@ const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) 
   );
 
   return (
-    <Form name="register" size="large" onFinish={onFinish}>
+    <Form name="register" initialValues={initialUserInfo} size="large" onFinish={onFinish}>
       <Form.Item
         name="reg_name"
         rules={[
@@ -88,7 +91,7 @@ const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) 
           },
         ]}
       >
-        <Input placeholder="请输入用户名" prefix={<UserOutlined style={{ color: icon.color }} />} />
+        <Input placeholder="请输入用户名" prefix={<UserOutlined style={{ color: '#c0c4cc' }} />} />
       </Form.Item>
 
       <Form.Item
@@ -106,7 +109,7 @@ const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) 
       >
         <Input.Password
           placeholder="请输入8-16位由数字与字母组成的密码"
-          prefix={<LockOutlined style={{ color: icon.color }} />}
+          prefix={<LockOutlined style={{ color: '#c0c4cc' }} />}
         />
       </Form.Item>
 
@@ -127,7 +130,7 @@ const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) 
           }),
         ]}
       >
-        <Input.Password placeholder="请再次输入密码" prefix={<LockOutlined style={{ color: icon.color }} />} />
+        <Input.Password placeholder="请再次输入密码" prefix={<LockOutlined style={{ color: '#c0c4cc' }} />} />
       </Form.Item>
 
       <Form.Item name="authCode">

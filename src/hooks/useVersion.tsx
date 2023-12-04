@@ -10,7 +10,7 @@ const getETag = async () => {
 };
 
 const useVersion = () => {
-  const timer = useRef<NodeJS.Timer>();
+  const timer = useRef<string | number | NodeJS.Timeout | undefined>();
   const uploadNotificationShow = useRef(false);
 
   const close = useCallback(() => {

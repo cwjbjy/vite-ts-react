@@ -94,7 +94,7 @@ const Header = memo(function Header({ userName }: Props) {
         <Dropdown menu={{ items: list, onClick: onUserClick }} className="user-drop">
           <div className="userImage">
             {fileName && (
-              <img src={`${import.meta.env.REACT_APP_IMG_URL}${fileName}`} className="user-img" alt="加载失败" />
+              <img src={`${import.meta.env.VITE_APP_IMG_URL}${fileName}`} className="user-img" alt="加载失败" />
             )}
             <span style={{ marginRight: 5 }}>
               <span style={{ marginRight: 2 }}>{userName}</span>
