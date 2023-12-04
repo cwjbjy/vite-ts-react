@@ -14,6 +14,7 @@ import type { UserInfo } from '@/types';
 
 import { USER_INFO } from '@/settings/localStorage';
 import { ACCESS_TOKEN, USER_MENU } from '@/settings/localStorage';
+import { GITHUB, BEI_AN } from '@/settings/user';
 
 interface ForwardObject {
   login: (params: UserInfo) => void;
@@ -47,7 +48,10 @@ const Login = () => {
 
   return (
     <Container>
-      <Header>PC端管理系统(React版)</Header>
+      <Header>
+        <div className="title">PC端管理系统(React版)</div>
+        <div className="subTitle">已通过Docker+Jenkins+Webhooks实现自动化打包+部署+邮件通知</div>
+      </Header>
       <Main>
         <Form>
           <div className="tab">
@@ -67,6 +71,20 @@ const Login = () => {
           </div>
         </Form>
       </Main>
+      <Footer>
+        <a href={GITHUB} target="_blank" className="link" rel="noreferrer">
+          项目仓库
+        </a>
+        <br />
+        <span
+          className="link"
+          onClick={() => {
+            window.open(BEI_AN);
+          }}
+        >
+          苏ICP备20022574号-2
+        </span>
+      </Footer>
     </Container>
   );
 };
@@ -85,13 +103,20 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  font-size: 50px;
-  letter-spacing: 5px;
+  width: 100%;
   height: 20vh;
   color: #fff;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  .title {
+    font-size: 50px;
+    letter-spacing: 5px;
+  }
+  .subTitle {
+    padding-top: 6px;
+  }
 `;
 
 export const Main = styled.main`
@@ -100,6 +125,18 @@ export const Main = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const Footer = styled.footer`
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  .link {
+    cursor: pointer;
+    color: #fff;
+  }
 `;
 
 export const Form = styled.div`
