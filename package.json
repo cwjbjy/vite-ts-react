@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:m": "node ./scripts/dev/index.js && vite -- --moduleLoad",
     "build": "tsc && vite build",
     "ts": "tsc --noEmit",
     "lint": "eslint src --fix --ext .ts,.tsx,.js,.jsx --max-warnings 0",
@@ -32,12 +33,14 @@
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
+    "@types/ejs": "^3.1.5",
     "@types/node": "^20.10.3",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "@vitejs/plugin-react": "^4.2.0",
+    "ejs": "^3.1.9",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.0",
@@ -46,12 +49,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "husky": "^8.0.3",
+    "inquirer": "^9.2.12",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.0",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-replace": "^0.1.1"
   },
   "lint-staged": {
     "src/!(assets)/*.{vue,js,jsx,ts,tsx,json}": [

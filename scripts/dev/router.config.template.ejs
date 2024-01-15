@@ -6,8 +6,9 @@ import LazyImportComponent from '@/components/lazyImportComponent';
 
 import * as path from '../settings/routerMap';
 
-import chartRoutes from './chart';
-import dragRoutes from './drag';
+<%_ chooseModules.forEach(function(item){%>
+  import <%=item %> from '<%=deelRouteName(item) %>';
+<% }) _%>
 
 const routes = [
   {
@@ -58,8 +59,9 @@ const routes = [
         path: path.MANAGE,
         element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/userManage'))} />,
       },
-      ...chartRoutes,
-      ...dragRoutes,
+      <%_ chooseModules.forEach(function(item){%>
+         ...<%=item %>,
+        <% }) %>
       {
         path: '/',
         element: (
