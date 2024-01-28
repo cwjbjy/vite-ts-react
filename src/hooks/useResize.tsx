@@ -13,5 +13,5 @@ export default function useResize(echartRef: RefObject<HTMLDivElement>) {
     return () => {
       window.removeEventListener('resize', debounceAutoSize, false);
     };
-  });
+  }, [debounceAutoSize]);
 }

@@ -64,15 +64,26 @@ const useVersion = () => {
     }
   }, [openNotification]);
 
+  /* 初始时检查，之后1h时检查一次 */
   useEffect(() => {
     getHash();
-    timer.current = setInterval(() => {
-      getHash();
-      // 1h检测一次
-    }, 3600000);
+    timer.current = setInterval(getHash, 60 * 60 * 1000);
     return () => {
       clearInterval(timer.current);
     };
+  }, [getHash]);
+
+  useEffect(() => {
+    /* 切换浏览器tab时 */
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        getHash();
+      }
+    });
+
+    /* 当鼠标点击过当前页面，此时切换到其他应用会触发页面的blur；
+    再次切回到浏览器则会触发focus事件 */
+    document.addEventListener('focus', getHash, true);
   }, [getHash]);
 };
 
