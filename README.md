@@ -24,6 +24,10 @@ yarn dev
 
 后台服务起来后，前端即可正常访问接口
 
+## 自动化部署
+
+Docker+Jenkins+WebHooks
+
 ## 老版项目地址
 
 https://github.com/cwjbjy/react-management
