@@ -10,9 +10,9 @@ UI框架：antD
 
 数据可视化工具：echarts 
 
-通信：fetch
+通信：fetch，WebSocket
 
-打包工具：wepack5
+打包工具：vite
 
 ## 接口
 
