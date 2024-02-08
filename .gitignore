@@ -12,6 +12,7 @@ dist
 dist-ssr
 /src/router/dev.routerConfig.tsx
 *.local
+stats.html
 
 # Editor directories and files
 .vscode/*

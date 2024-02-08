@@ -1,6 +1,5 @@
-// eslint-disable-next-line no-unused-expressions
 !(function (window, document) {
-  var size = 5; //设置验证码长度
+  const size = 5; //设置验证码长度
   function GVerify(options) {
     //创建一个图形验证码对象，接收options对象为参数
     this.options = {
@@ -14,7 +13,7 @@
     };
     if (Object.prototype.toString.call(options) == '[object Object]') {
       //判断传入参数类型
-      for (var i in options) {
+      for (const i in options) {
         //根据传入的参数，修改默认参数值
         this.options[i] = options[i];
       }
@@ -35,8 +34,8 @@
 
     /**初始化方法**/
     _init: function () {
-      var con = document.getElementById(this.options.id);
-      var canvas = document.createElement('canvas');
+      const con = document.getElementById(this.options.id);
+      const canvas = document.createElement('canvas');
       this.options.width = con.offsetWidth > 0 ? con.offsetWidth : '120';
       this.options.height = con.offsetHeight > 0 ? con.offsetHeight : '40';
       canvas.id = this.options.canvasId;
@@ -45,16 +44,17 @@
       canvas.style.cursor = 'pointer';
       // canvas.innerHTML = "您的浏览器版本不支持canvas";
       con.appendChild(canvas);
-      var parent = this;
+      const that = this;
       canvas.onclick = function () {
-        parent.refresh();
+        that.refresh();
       };
     },
 
     /**生成验证码**/
     refresh: function () {
       this.options.code = '';
-      var canvas = document.getElementById(this.options.canvasId);
+      let txtArr = '';
+      const canvas = document.getElementById(this.options.canvasId);
       if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
       } else {
@@ -68,15 +68,15 @@
 
       if (this.options.type == 'blend') {
         //判断验证码类型
-        var txtArr = this.options.numArr.concat(this.options.letterArr);
+        txtArr = this.options.numArr.concat(this.options.letterArr);
       } else if (this.options.type == 'number') {
-        var txtArr = this.options.numArr;
+        txtArr = this.options.numArr;
       } else {
-        var txtArr = this.options.letterArr;
+        txtArr = this.options.letterArr;
       }
 
       for (var i = 1; i <= size; i++) {
-        var txt = txtArr[randomNum(0, txtArr.length)];
+        const txt = txtArr[randomNum(0, txtArr.length)];
         this.options.code += txt;
         ctx.font = randomNum(this.options.height / 2, this.options.height) + 'px SimHei'; //随机生成字体大小
         ctx.fillStyle = randomColor(50, 160); //随机生成字体颜色
@@ -84,9 +84,9 @@
         ctx.shadowOffsetY = randomNum(-3, 3);
         ctx.shadowBlur = randomNum(-3, 3);
         ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-        var x = (this.options.width / (size + 1)) * i;
-        var y = this.options.height / 2;
-        var deg = randomNum(-30, 30);
+        const x = (this.options.width / (size + 1)) * i;
+        const y = this.options.height / 2;
+        const deg = randomNum(-30, 30);
         /**设置旋转角度和坐标原点**/
         ctx.translate(x, y);
         ctx.rotate((deg * Math.PI) / 180);
@@ -96,7 +96,7 @@
         ctx.translate(-x, -y);
       }
       /**绘制干扰线**/
-      for (var i = 0; i < 4; i++) {
+      for (let i = 0; i < 4; i++) {
         ctx.strokeStyle = randomColor(40, 180);
         ctx.beginPath();
         ctx.moveTo(randomNum(0, this.options.width), randomNum(0, this.options.height));
@@ -104,7 +104,7 @@
         ctx.stroke();
       }
       /**绘制干扰点**/
-      for (var i = 0; i < this.options.width / 4; i++) {
+      for (let i = 0; i < this.options.width / 4; i++) {
         ctx.fillStyle = randomColor(0, 255);
         ctx.beginPath();
         ctx.arc(randomNum(0, this.options.width), randomNum(0, this.options.height), 1, 0, 2 * Math.PI);
@@ -114,9 +114,9 @@
 
     /**验证验证码**/
     validate: function (code) {
-      var code = code.toLowerCase();
-      var v_code = this.options.code.toLowerCase();
-      if (code == v_code) {
+      const newCode = code.toLowerCase();
+      const v_code = this.options.code.toLowerCase();
+      if (newCode == v_code) {
         return true;
       } else {
         this.refresh();
@@ -126,7 +126,7 @@
   };
   /**生成字母数组**/
   function getAllLetter() {
-    var letterStr =
+    const letterStr =
       'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z';
     return letterStr.split(',');
   }
@@ -136,9 +136,9 @@
   }
   /**生成一个随机色**/
   function randomColor(min, max) {
-    var r = randomNum(min, max);
-    var g = randomNum(min, max);
-    var b = randomNum(min, max);
+    const r = randomNum(min, max);
+    const g = randomNum(min, max);
+    const b = randomNum(min, max);
     return 'rgb(' + r + ',' + g + ',' + b + ')';
   }
   window.GVerify = GVerify;
