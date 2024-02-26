@@ -1,15 +1,13 @@
 export const themeColor = {
-  'theme-gray': {
+  default: {
     font: '#333',
     fleetBg: 'rgb(6,42,88)',
   },
-
-  'theme-blue': {
+  blue: {
     font: '#333',
     fleetBg: 'rgb(6,42,88)',
   },
-
-  'theme-black': {
+  black: {
     font: '#fff',
     fleetBg: '#393939',
   },

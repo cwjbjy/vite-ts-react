@@ -1,14 +1,10 @@
 .Menu {
-  @include themify($themes) {
-    background-color: themed('aside-background');
-    color: themed('font-color');
-  }
+  background-color: var(--background-aside);
+  color: var(--font-primary);
 }
 
 aside {
-  @include themify($themes) {
-    background-color: themed('aside-background');
-  }
+  background-color: var(--background-aside);
 }
 
 .ant-menu-item {
@@ -24,37 +20,27 @@ aside {
 /* 菜单样式 */
 
 .ant-menu-item {
-  @include themify($themes) {
-    background-color: themed('aside-background');
-    color: themed('font-color');
-  }
+  background-color: var(--background-aside);
+  color: var(--font-primary);
   &:hover {
     color: rgb(255, 208, 75) !important;
   }
 }
 
 .ant-menu-item:active {
-  @include themify($themes) {
-    background-color: themed('menu-select') !important;
-  }
+  background-color: var(--font-highlight) !important;
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  @include themify($themes) {
-    background-color: themed('menu-select');
-    color: themed('font-color');
-  }
+  background-color: var(--font-highlight);
+  color: var(--font-primary);
   > span {
     > a {
-      @include themify($themes) {
-        background-color: themed('menu-select');
-      }
+      background-color: var(--font-highlight);
     }
   }
   > a {
-    @include themify($themes) {
-      background-color: themed('menu-select');
-    }
+    background-color: var(--font-highlight);
   }
 }
 
@@ -71,9 +57,7 @@ aside {
 }
 
 .ant-menu-submenu > .ant-menu {
-  @include themify($themes) {
-    background-color: themed('aside-background');
-  }
+  background-color: var(--background-aside);
 }
 
 .ant-menu-submenu-title {
@@ -84,9 +68,7 @@ aside {
     color: #fff !important;
   }
   &:active {
-    @include themify($themes) {
-      background-color: themed('menu-select') !important;
-    }
+    background-color: var(--font-highlight) !important;
   }
 }
 

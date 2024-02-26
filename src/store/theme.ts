@@ -9,7 +9,7 @@ interface ThemeState {
 
 // 创建状态存储
 const useThemeStore = create<ThemeState>((set) => ({
-  theme: 'theme-gray',
+  theme: 'default',
   changeTheme: (theme) => set({ theme }),
 }));
 

@@ -40,7 +40,7 @@ export default () => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/styles/index.scss";',
+          additionalData: '@import "@/assets/styles/scss/index.scss";',
         },
       },
     },

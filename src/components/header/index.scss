@@ -1,12 +1,9 @@
 .header {
   display: flex;
   height: 70px;
-  @include themify($themes) {
-    background-color: themed('header-background');
-    color: themed('font-color');
-  }
-  color: $color;
-  cursor: $c_pointer;
+  background-color: var(--background-header);
+  color: var(--font-primary);
+  cursor: pointer;
   &_left {
     width: 50%;
     line-height: 70px;
@@ -17,12 +14,12 @@
   }
   &_right {
     width: 50%;
-    @extend %right_center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     .iconfont {
       font-size: 30px;
-      @include themify($themes) {
-        color: themed('icon-font');
-      }
+      color: var(--icon-font);
     }
     .user-img {
       width: 50px;

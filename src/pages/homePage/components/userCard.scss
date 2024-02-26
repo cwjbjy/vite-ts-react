@@ -4,9 +4,7 @@
     align-items: center;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    @include themify($themes) {
-      border-bottom: 2px solid themed('card-border');
-    }
+    border-bottom: 2px solid var(--card-border);
     .user-img {
       width: 120px;
       height: 120px;
@@ -15,7 +13,11 @@
     }
     .user-area {
       height: 120px;
-      @extend %column_center;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      flex-direction:column
     }
     .user-name {
       font-size: 30px;
@@ -31,10 +33,9 @@
       font-size: 14px;
       line-height: 25px;
       width: 100%;
-      @include themify($themes) {
-        color: themed('card-font');
-      }
-      @extend %space_between;
+      display: flex;
+      justify-content: space-between;
+      color: var(--card-font);
     }
   }
 }

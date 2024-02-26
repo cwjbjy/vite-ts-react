@@ -13,7 +13,7 @@ export interface UserInfo {
 }
 
 //主题
-export type ThemeType = 'theme-gray' | 'theme-blue' | 'theme-black';
+export type ThemeType = 'default' | 'blue' | 'black';
 
 //echarts
 export interface EchartsProps {

@@ -1,4 +1,4 @@
-body{
+body {
   min-width: 1150px;
   overflow-y: hidden;
 }
@@ -12,9 +12,7 @@ article {
   width: 100%;
   overflow: auto;
   height: inherit;
-  @include themify($themes) {
-    background-color: themed("main-background");
-  }
+  background-color: var(--background-main);
 }
 
 section {
@@ -23,52 +21,39 @@ section {
 
 /* antd UI修改 */
 
-.ant-back-top{
+.ant-back-top {
   right: 20px;
 }
 
 .ant-card {
-  @include themify($themes) {
-    background-color: themed("card-background");
-    color: themed("card-font");
-    border: 1px solid themed("card-border");
-  }
+  background-color: var(--card-background);
+  color: var(--card-font);
+  border: 1px solid var(--card-border);
 }
 
-.ant-card-body{
-    font-size: 16px;
+.ant-card-body {
+  font-size: 16px;
 }
 
 .ant-progress-text {
-  @include themify($themes) {
-    color: themed("card-font");
-  }
+  color: var(--card-font);
 }
 
 .ant-card-head-title {
-  @include themify($themes) {
-    color: themed("card-font");
-  }
+  color: var(--card-font);
 }
 
 .ant-table-thead > tr > th {
-  @include themify($themes) {
-    background-color: themed("card-background");
-    color: themed("card-font");
-    font-size: 16px;
-    font-weight: bold;
-  }
+  background-color: var(--card-background) !important;
+  color: var(--card-font) !important;
+  font-size: 16px;
 }
 
 .ant-table table {
-  @include themify($themes) {
-    background-color: themed("card-background");
-    color: themed("card-font");
-  }
+  background-color: var(--card-background);
+  color: var(--card-font);
 }
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
-  @include themify($themes) {
-    background-color: themed("main-background");
-  }
+  background-color: var(--background-main);
 }

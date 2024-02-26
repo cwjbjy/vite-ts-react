@@ -13,6 +13,8 @@ import router from './router';
 import './utils/observer';
 import './utils/i18';
 
+import '@/assets/styles/theme/index.css';
+
 //自己的npm包，数据埋点
 init({
   url: `${import.meta.env.VITE_APP_AUTH_URL}/track`, //必传参数，数据上传服务器地址
