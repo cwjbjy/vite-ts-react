@@ -1,6 +1,6 @@
 .Menu {
   background-color: var(--background-aside);
-  color: var(--font-primary);
+  color: var(--font-primary) !important;
 }
 
 aside {
@@ -20,8 +20,8 @@ aside {
 /* 菜单样式 */
 
 .ant-menu-item {
-  background-color: var(--background-aside);
-  color: var(--font-primary);
+  // background-color: var(--background-aside);
+  color: var(--font-primary) !important;
   &:hover {
     color: rgb(255, 208, 75) !important;
   }
@@ -32,8 +32,8 @@ aside {
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: var(--font-highlight);
-  color: var(--font-primary);
+  background-color: var(--font-highlight) !important;
+  color: rgb(255, 208, 75) !important;
   > span {
     > a {
       background-color: var(--font-highlight);
@@ -63,6 +63,7 @@ aside {
 .ant-menu-submenu-title {
   > span {
     margin-left: 10px;
+    color: var(--font-primary) !important;
   }
   &:hover {
     color: #fff !important;

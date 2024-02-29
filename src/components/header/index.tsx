@@ -88,7 +88,7 @@ const Header = memo(function Header({ userName }: Props) {
   const defaultSelectedKeys = useMemo(() => ls.get(THEME) || 'default', []);
 
   useEffect(() => {
-    window.document.documentElement.setAttribute('data-theme', ls.get(THEME));
+    window.document.documentElement.setAttribute('data-theme', ls.get(THEME) || 'default');
   }, []);
 
   return (
