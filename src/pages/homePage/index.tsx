@@ -40,7 +40,7 @@ const HomePage = () => {
       }),
     {
       onSuccess: (res) => {
-        setCreateTime(res.data[0].createTime);
+        setCreateTime(res.data);
       },
     },
   );

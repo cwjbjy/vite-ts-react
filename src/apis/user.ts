@@ -2,7 +2,7 @@ import HttpClient from '@/utils/fetch';
 
 import { Url } from './url';
 
-import type { RowItem, UserImage, UserTime, Login } from './model/userModel';
+import type { RowItem, UserImage, Login } from './model/userModel';
 import type {
   LoginParams,
   RegisterParams,
@@ -44,7 +44,7 @@ export const getImage = (params: UserNameParams) => {
 
 //获取用户单条信息
 export const getUser = (params: UserNameParams) => {
-  return HttpClient.get<UserTime>(Url.GetUser, params);
+  return HttpClient.get<{ data: string }>(Url.GetUser, params);
 };
 
 //埋点
