@@ -10,3 +10,18 @@ export interface RowItem {
   photo: string;
   user_name: string;
 }
+
+export interface UserImage {
+  data: { photo: string }[];
+}
+
+export interface UserTime {
+  data: { createTime: string }[];
+}
+
+export interface Login {
+  data: {
+    token: string;
+    auth: string;
+  };
+}

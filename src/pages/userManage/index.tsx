@@ -20,15 +20,6 @@ interface Info {
   user_name: string;
 }
 
-const setData = (data: RowItem[]) => {
-  const newArr: RowItem[] = [];
-  data.forEach((item: RowItem, index: number) => {
-    const newItem = Object.assign({}, item, { key: index });
-    newArr.push(newItem);
-  });
-  return newArr;
-};
-
 const UserManage = () => {
   const [info, setInfo] = useState<Info>();
   const [isModalVisible, setModal] = useState(false);
@@ -43,7 +34,7 @@ const UserManage = () => {
 
   const { run, loading } = useRequest(user, {
     onSuccess: (res) => {
-      setTableData(setData(res.data));
+      setTableData(res.data);
     },
   });
 

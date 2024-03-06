@@ -70,7 +70,7 @@ const UserTable = memo(function UserTable({ tableData, onModal, onDelete }: Prop
     [onDelete, onEdit],
   );
 
-  return <MyTable bordered columns={columns} dataSource={tableData} />;
+  return <MyTable bordered columns={columns} dataSource={tableData} rowKey={(record: any) => record.key} />;
 });
 
 export default UserTable;
