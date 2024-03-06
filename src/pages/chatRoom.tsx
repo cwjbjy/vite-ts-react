@@ -140,6 +140,7 @@ const ChatRoom = () => {
         wrapClassName="app-img-modal"
         open={isModalImage}
         footer={null}
+        getContainer={false}
         onCancel={() => setIsModalImage(false)}
         width="90%"
       >
