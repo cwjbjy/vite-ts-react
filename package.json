@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev:m": "node ./scripts/dev/index.js && vite -- --moduleLoad",
+    "dev": "node ./scripts/dev/index.js && vite --host",
     "build": "tsc && vite build",
     "ts": "tsc --noEmit",
     "lint": "eslint src --fix --ext .ts,.tsx,.js,.jsx --max-warnings 0",
@@ -57,7 +56,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-replace": "^0.1.1"
+    "vite-plugin-filter-replace": "^0.1.13"
   },
   "lint-staged": {
     "src/!(assets)/*.{vue,js,jsx,ts,tsx,json}": [

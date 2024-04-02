@@ -4,27 +4,27 @@ import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
-import { replaceCodePlugin } from 'vite-plugin-replace';
+import replace from 'vite-plugin-filter-replace';
 // https://vitejs.dev/config/
 
 export default () => {
   return defineConfig({
     plugins: [
       react(),
-      {
-        ...replaceCodePlugin({
-          replacements: [
-            {
+      replace(
+        [
+          {
+            filter: /\.ts$/,
+            replace: {
               from: './routes',
               to: './dev.routerConfig.tsx',
             },
-          ],
-        }),
-        apply(config, { command }) {
-          // 开发环境，并且包含启动参数--moduleLoad
-          return command === 'serve' && process.argv.slice(3)?.join() === '--moduleLoad';
+          },
+        ],
+        {
+          apply: 'serve',
         },
-      },
+      ),
       {
         ...viteCompression(),
         apply: 'build',
