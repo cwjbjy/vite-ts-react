@@ -1,4 +1,4 @@
-import qs from 'qs';
+import queryString from 'query-string';
 
 import { ls } from '@/utils/storage';
 
@@ -30,10 +30,10 @@ class FetchClient {
 
     if (method === 'GET' || method === 'DELETE') {
       //fetch对GET请求等，不支持将参数传在body上，只能拼接url
-      data = qs.stringify(params, {
-        arrayFormat: 'repeat',
-      }) as string;
-      url = `${url}?${data}`;
+      if (params) {
+        data = queryString.stringify(params);
+        url = `${url}?${data}`;
+      }
     } else {
       //非form-data传输JSON数据格式
       if (!['[object FormData]', '[object URLSearchParams]'].includes(Object.prototype.toString.call(params))) {
@@ -72,7 +72,7 @@ class FetchClient {
   /**
    * 代理模式
    */
-  async httpFactory<T>({ url = '', params = {}, method }: Props): Promise<T> {
+  async httpFactory<T>({ url, params, method }: Props): Promise<T> {
     const req = this.interceptorsRequest({
       url,
       method,
