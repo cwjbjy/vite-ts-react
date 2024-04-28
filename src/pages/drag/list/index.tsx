@@ -5,7 +5,6 @@ import { Card } from 'antd';
 
 import Column from './components/column';
 import initialData from './components/todoData';
-import './index.scss';
 
 const ReactBeautifulTodo = () => {
   const [state, setState] = useState<any>(initialData);
@@ -74,7 +73,7 @@ const ReactBeautifulTodo = () => {
     <section>
       <Card hoverable title={<strong>可通过拖拽进行分组与排序;暂不支持IE</strong>}>
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="content">
+          <div style={{ display: 'flex' }}>
             {state.columnOrder.map((columnId: string) => {
               const column = state.columns[columnId];
               const tasks = column.taskIds.map((taskId: string) => state.tasks[taskId]);
