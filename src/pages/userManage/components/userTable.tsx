@@ -29,16 +29,19 @@ const UserTable = memo(function UserTable({ tableData, onModal, onDelete }: Prop
       {
         title: '用户名',
         dataIndex: 'user_name',
+        key: 'user_name',
       },
       {
         title: '单击图像可以放大',
         dataIndex: 'photo',
+        key: 'photo',
         align: 'center',
         render: (text: string) => <Image width={40} src={`${img_url}${text}`} />,
       },
       {
         title: '角色描述',
         dataIndex: 'authority',
+        key: 'authority',
         render: (text: number) => (
           <span className={text === 1 ? 'blue' : ''}>{text === 1 ? '管理员' : '普通用户'}</span>
         ),
@@ -46,6 +49,7 @@ const UserTable = memo(function UserTable({ tableData, onModal, onDelete }: Prop
       {
         title: '注册时间',
         dataIndex: 'createTime',
+        key: 'createTime',
       },
       {
         title: '操作',
@@ -70,7 +74,7 @@ const UserTable = memo(function UserTable({ tableData, onModal, onDelete }: Prop
     [onDelete, onEdit],
   );
 
-  return <MyTable bordered columns={columns} dataSource={tableData} rowKey={(record: any) => record.key} />;
+  return <MyTable bordered columns={columns} dataSource={tableData} rowKey={(record: any) => record.id} />;
 });
 
 export default UserTable;
