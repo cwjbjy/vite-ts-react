@@ -48,6 +48,8 @@ const useVersion = () => {
   );
 
   const getHash = useCallback(() => {
+    //开发环境不进行版本更新提示
+    if (process.env.NODE_ENV === 'development') return;
     if (!uploadNotificationShow.current) {
       // 在 js 中请求首页地址，这样不会刷新界面，也不会跨域
       getETag().then((res) => {

@@ -7,7 +7,7 @@ const Message = () => {
     <Wrapper>
       <Row className="icon-area" style={{ marginBottom: 10 }}>
         <Col span="8" className="icon-box">
-          <Card hoverable bodyStyle={{ padding: 0 }}>
+          <Card hoverable styles={{ body: { padding: 0 } }}>
             <div className="icon-content">
               <UserOutlined className="grid-con-icon grid-con-1" />
               <div className="icon-info">
@@ -18,7 +18,7 @@ const Message = () => {
           </Card>
         </Col>
         <Col span="8" className="icon-box">
-          <Card hoverable bodyStyle={{ padding: 0 }}>
+          <Card hoverable styles={{ body: { padding: 0 } }}>
             <div className="icon-content">
               <NotificationOutlined className="grid-con-icon grid-con-2" />
               <div className="icon-info">
@@ -29,7 +29,7 @@ const Message = () => {
           </Card>
         </Col>
         <Col span="8" className="icon-box">
-          <Card hoverable bodyStyle={{ padding: 0 }}>
+          <Card hoverable styles={{ body: { padding: 0 } }}>
             <div className="icon-content">
               <FileDoneOutlined className="grid-con-icon grid-con-3" />
               <div className="icon-info">
