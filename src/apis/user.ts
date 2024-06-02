@@ -1,8 +1,5 @@
 import HttpClient from '@/utils/fetch';
 
-import { Url } from './url';
-
-import type { RowItem, UserImage, Login } from './model/userModel';
 import type {
   LoginParams,
   RegisterParams,
@@ -10,7 +7,10 @@ import type {
   UpdateUserParams,
   UserNameParams,
   TrackParams,
-} from './types/userType';
+} from '../types/userParams';
+import type { RowItem, UserImage, Login } from '../types/userResponse';
+
+import { Url } from '@/settings/url';
 
 //登录
 export const login = (params: LoginParams) => {

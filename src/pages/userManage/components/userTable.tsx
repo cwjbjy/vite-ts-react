@@ -4,7 +4,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Table, Image, Button, Popconfirm } from 'antd';
 import styled from 'styled-components';
 
-import type { RowItem } from '@/apis/model/userModel';
+import type { RowItem } from '@/types/userResponse';
 interface Props {
   tableData: RowItem[];
   onModal({ isModalVisible, info }: { isModalVisible: boolean; info: RowItem }): void;

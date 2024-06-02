@@ -6,11 +6,12 @@ import CryptoJS from 'crypto-es';
 
 import { ls } from '@/utils/storage';
 
-import type { RowItem } from '@/apis/model/userModel';
 import { user, updateUser, deleteUser } from '@/apis/user';
 
 import PassChange from './components/passChange';
 import UserTable from './components/userTable';
+
+import type { RowItem } from '@/types/userResponse';
 
 import { USER_INFO } from '@/settings/localStorage';
 import { MANAGE_NAME } from '@/settings/user';

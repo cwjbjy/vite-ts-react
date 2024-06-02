@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Dropdown } from 'antd';
+import styled from 'styled-components';
 
 import { getImage } from '@/apis/user';
 
@@ -14,12 +15,6 @@ import { LOGIN } from '@/settings/routerMap';
 import { GITHUB } from '@/settings/user';
 import useFileStore from '@/store/file';
 import useThemeStore from '@/store/theme';
-
-import './index.scss';
-
-interface Props {
-  userName: string;
-}
 
 const themes: MenuProps['items'] = [
   {
@@ -51,7 +46,7 @@ const list: MenuProps['items'] = [
   },
 ];
 
-const Header = memo(function Header({ userName }: Props) {
+const Header = memo(function Header({ userName }: { userName: string }) {
   const { fileName, setFileName } = useFileStore();
   const { theme, changeTheme } = useThemeStore();
   const navigation = useNavigate();
@@ -86,11 +81,11 @@ const Header = memo(function Header({ userName }: Props) {
   }, [theme]);
 
   return (
-    <header className="header">
-      <div className="header_left">
+    <Wrapper>
+      <div className="left">
         <span style={{ marginLeft: 10 }}>PC端后台管理系统(React版)</span>
       </div>
-      <div className="header_right">
+      <div className="right">
         <Dropdown
           menu={{ items: themes, selectable: true, onClick: onChangeTheme, defaultSelectedKeys: [theme] }}
           className="user-drop"
@@ -109,8 +104,57 @@ const Header = memo(function Header({ userName }: Props) {
           </div>
         </Dropdown>
       </div>
-    </header>
+    </Wrapper>
   );
 });
 
 export default Header;
+
+const Wrapper = styled.header`
+  display: flex;
+  height: 70px;
+  background-color: var(--background-header);
+  color: var(--font-primary);
+  cursor: pointer;
+  .left {
+    width: 50%;
+    line-height: 70px;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-indent: 10px;
+    display: inline-flex;
+  }
+  .right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .iconfont {
+      font-size: 30px;
+      color: var(--icon-font);
+    }
+    .user-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      padding: 5px;
+      object-fit: cover;
+    }
+    .user-drop {
+      padding: 5px;
+    }
+    .userImage {
+      display: inline-flex;
+      > span {
+        line-height: 50px;
+      }
+    }
+  }
+  .ant-dropdown-menu-item,
+  .ant-dropdown-menu-submenu-title {
+    text-align: center;
+    &:hover {
+      color: #66b1ff;
+    }
+  }
+`;
