@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { useRequest } from 'ahooks';
 import { Row, Col, Card } from 'antd';
@@ -31,7 +31,7 @@ const HomePage = () => {
 
   const [createTime, setCreateTime] = useState('');
 
-  const userName = useMemo(() => ls.get(USER_INFO)?.userName, []);
+  const userName = ls.get(USER_INFO)?.userName;
 
   useRequest(
     () =>

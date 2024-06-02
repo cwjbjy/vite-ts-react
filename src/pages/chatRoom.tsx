@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo, useState, useCallback } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 import { Button, message, Input, Card, Modal } from 'antd';
 import styled from 'styled-components';
@@ -20,12 +20,15 @@ const ChatRoom = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalImage, setIsModalImage] = useState(false);
   const [input, setInput] = useState('');
-  const userName = useMemo(() => ls.get('userInfo')?.userName, []);
-  const { fileName } = useFileStore();
   const [connectFlag, setConnectFlag] = useState(false);
   const [closeFlag, setCloseFlag] = useState(true);
   const [latestMessage, setLatestMessage] = useState();
+
+  const { fileName } = useFileStore();
+
   const infoListRef = useRef<HTMLDivElement>(null);
+
+  const userName = ls.get('userInfo')?.userName;
 
   useEffect(() => {
     window.eventBus.on(BUS_WS, (data: any) => {
@@ -42,11 +45,7 @@ const ChatRoom = () => {
     }
   }, [latestMessage]);
 
-  const _closeCallBack = useCallback(() => {
-    setMessageHistory([]);
-  }, []);
-
-  const connect = useCallback(() => {
+  const connect = () => {
     const user = {
       type: 'setName',
       name: userName,
@@ -54,21 +53,21 @@ const ChatRoom = () => {
     };
     insService.open({
       params: user,
-      closeCallBack: _closeCallBack,
+      closeCallBack: () => setMessageHistory([]),
     });
     setConnectFlag(true);
     setCloseFlag(false);
-  }, [userName, fileName, _closeCallBack]);
+  };
 
-  const close = useCallback(() => {
+  const close = () => {
     insService.close({
       type: 'close',
     });
     setConnectFlag(false);
     setCloseFlag(true);
-  }, []);
+  };
 
-  const send = useCallback(() => {
+  const send = () => {
     if (!connectFlag) {
       message.error('请先连接');
       return;
@@ -79,7 +78,7 @@ const ChatRoom = () => {
       text: input,
     });
     setInput('');
-  }, [connectFlag, input]);
+  };
 
   return (
     <Wrapper>

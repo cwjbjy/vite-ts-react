@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import { message } from 'antd';
 import styled from 'styled-components';
 
@@ -8,12 +6,13 @@ import WB from '@/assets/images/login/wb.png';
 import WX from '@/assets/images/login/wx.png';
 
 const LoginOther = () => {
-  const thirdLogin = useCallback(() => {
+  const thirdLogin = () => {
     message.warning({
       content: '功能未开发，请使用用户注册',
       className: 'custom-message',
     });
-  }, []);
+  };
+
   return (
     <Wrapper>
       <div className="other-acc">

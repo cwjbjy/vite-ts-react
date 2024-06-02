@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useExternal } from 'ahooks';
 import styled from 'styled-components';
@@ -89,7 +89,8 @@ const linkDataArray = [
 
 const FoldChart = () => {
   const status = useExternal('/static/go.js');
-  const dealShow = useCallback(() => {
+
+  const dealShow = () => {
     const $ = window.go.GraphObject.make;
 
     const myDiagram = $(window.go.Diagram, 'myDiagramDiv', {
@@ -220,10 +221,11 @@ const FoldChart = () => {
       nodeDataArray: nodeDataArray,
       linkDataArray: linkDataArray,
     });
-  }, []);
+  };
+
   useEffect(() => {
     if (status === 'ready') dealShow();
-  }, [status, dealShow]);
+  }, [status]);
 
   return <GoChart id="myDiagramDiv"></GoChart>;
 };

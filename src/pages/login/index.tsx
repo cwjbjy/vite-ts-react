@@ -38,9 +38,9 @@ const Login = () => {
     ls.remove(USER_MENU); //清除菜单栏
   }, []);
 
-  const onTab = useCallback(() => {
+  const onTab = () => {
     setFlag((prev) => !prev);
-  }, []);
+  };
 
   const onRegister = useCallback((params: UserInfo) => {
     loginRef.current?.login({
@@ -49,9 +49,9 @@ const Login = () => {
     });
   }, []);
 
-  const openModal = useCallback(() => {
+  const openModal = () => {
     setIsModal(true);
-  }, []);
+  };
 
   return (
     <Container>

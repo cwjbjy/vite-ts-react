@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useRequest } from 'ahooks';
 import { Card, Modal, message, Spin } from 'antd';
@@ -25,7 +25,7 @@ const UserManage = () => {
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState('');
   const [tableData, setTableData] = useState<RowItem[]>([]);
-  const userName = useMemo(() => ls.get('userInfo')?.userName, []);
+  const userName = ls.get('userInfo')?.userName;
 
   const onModal = useCallback(({ isModalVisible, info }: { isModalVisible: boolean; info: Info }) => {
     setModal(isModalVisible);

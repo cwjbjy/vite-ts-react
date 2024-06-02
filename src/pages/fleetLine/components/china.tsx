@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
 import type { ApiData } from '@/settings/map';
 
@@ -80,7 +80,7 @@ const convertData = function (data: ApiData) {
 const FleetModel = () => {
   const echart = useRef(null);
 
-  const initial = useCallback(() => {
+  const initial = () => {
     const myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
@@ -177,11 +177,11 @@ const FleetModel = () => {
         ...buildLines(apiData, geoCoordMap),
       ],
     });
-  }, []);
+  };
 
   useEffect(() => {
     initial();
-  }, [initial]);
+  }, []);
 
   return <div ref={echart} className="myChart"></div>;
 };

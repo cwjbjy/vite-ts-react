@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { useExternal } from 'ahooks';
 
@@ -9,7 +9,8 @@ import userImage from '@/assets/images/home/user.jpg';
 const CommonChart = () => {
   const status = useExternal('/static/go.js');
   const mygoChart = useRef(null);
-  const dealShow = useCallback(() => {
+
+  const dealShow = () => {
     const $ = window.go.GraphObject.make;
     const myDiagram = $(window.go.Diagram, mygoChart.current, {
       initialContentAlignment: window.go.Spot.Center, // 顶格显示
@@ -185,10 +186,11 @@ const CommonChart = () => {
     ];
     myDiagram.model = myModel;
     myDiagram.commandHandler.zoomToFit(); //自适应，能看到流程图全部
-  }, []);
+  };
+
   useEffect(() => {
     if (status === 'ready') dealShow();
-  }, [status, dealShow]);
+  }, [status]);
 
   return <GoChart ref={mygoChart}></GoChart>;
 };

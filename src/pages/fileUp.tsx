@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState } from 'react';
 
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
@@ -35,7 +35,7 @@ const FileUp = () => {
   const { fileName, setFileName } = useFileStore();
   const [loading, setLoading] = useState(false);
 
-  const userName = useMemo(() => ls.get(USER_INFO)?.userName, []);
+  const userName = ls.get(USER_INFO)?.userName;
   const { run } = useRequest(getImage, {
     manual: true,
     onSuccess: (res) => {
@@ -50,19 +50,16 @@ const FileUp = () => {
     </div>
   );
 
-  const handleChange = useCallback(
-    (info: UploadChangeParam<UploadFile>) => {
-      if (info.file.status === 'uploading') {
-        setLoading(true);
-        return;
-      }
-      if (info.file.status === 'done') {
-        run({ user_name: userName });
-        setLoading(false);
-      }
-    },
-    [run, userName],
-  );
+  const handleChange = (info: UploadChangeParam<UploadFile>) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === 'done') {
+      run({ user_name: userName });
+      setLoading(false);
+    }
+  };
 
   return (
     <Wrapper>
