@@ -37,13 +37,6 @@ export default () => {
         '@': path.resolve('./src'), // @代替src
       },
     },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/assets/styles/scss/index.scss";',
-        },
-      },
-    },
     build: {
       rollupOptions: {
         output: {

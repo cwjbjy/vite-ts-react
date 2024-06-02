@@ -1,18 +1,15 @@
-import { memo, useCallback, useEffect, useMemo } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CaretDownOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Dropdown } from 'antd';
 
-import { ls } from '@/utils/storage';
-
 import { getImage } from '@/apis/user';
 
 import type { ThemeType } from '@/types';
 import type { MenuProps } from 'antd';
 
-import { THEME } from '@/settings/localStorage';
 import { LOGIN } from '@/settings/routerMap';
 import { GITHUB } from '@/settings/user';
 import useFileStore from '@/store/file';
@@ -56,7 +53,7 @@ const list: MenuProps['items'] = [
 
 const Header = memo(function Header({ userName }: Props) {
   const { fileName, setFileName } = useFileStore();
-  const { changeTheme } = useThemeStore();
+  const { theme, changeTheme } = useThemeStore();
   const navigation = useNavigate();
 
   useRequest(() => getImage({ user_name: userName }), {
@@ -71,7 +68,6 @@ const Header = memo(function Header({ userName }: Props) {
       const theme = e.key as ThemeType;
       changeTheme(theme);
       window.document.documentElement.setAttribute('data-theme', theme);
-      ls.set(THEME, theme);
     },
     [changeTheme],
   );
@@ -85,11 +81,9 @@ const Header = memo(function Header({ userName }: Props) {
     [navigation],
   );
 
-  const defaultSelectedKeys = useMemo(() => ls.get(THEME) || 'default', []);
-
   useEffect(() => {
-    window.document.documentElement.setAttribute('data-theme', ls.get(THEME) || 'default');
-  }, []);
+    window.document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   return (
     <header className="header">
@@ -98,7 +92,7 @@ const Header = memo(function Header({ userName }: Props) {
       </div>
       <div className="header_right">
         <Dropdown
-          menu={{ items: themes, selectable: true, onClick: onChangeTheme, defaultSelectedKeys: [defaultSelectedKeys] }}
+          menu={{ items: themes, selectable: true, onClick: onChangeTheme, defaultSelectedKeys: [theme] }}
           className="user-drop"
         >
           <i className="iconfont icon-zhuti_tiaosepan_o"></i>

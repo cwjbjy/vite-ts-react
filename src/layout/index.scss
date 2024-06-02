@@ -26,21 +26,21 @@ section {
 }
 
 .ant-card {
-  background-color: var(--card-background);
-  color: var(--card-font);
-  border: 1px solid var(--card-border);
+  background-color: var(--card-background) !important;
+  color: var(--card-font) !important;
+  border: 1px solid var(--card-border) !important;
 }
 
 .ant-card-body {
   font-size: 16px;
 }
 
-.ant-progress-text {
-  color: var(--card-font);
+.ant-progress .ant-progress-text {
+  color: var(--card-font) !important;
 }
 
 .ant-card-head-title {
-  color: var(--card-font);
+  color: var(--card-font) !important;
 }
 
 .ant-table-thead > tr > th {
@@ -50,10 +50,10 @@ section {
 }
 
 .ant-table table {
-  background-color: var(--card-background);
-  color: var(--card-font);
+  background-color: var(--card-background) !important;
+  color: var(--card-font) !important;
 }
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
-  background-color: var(--background-main);
+  background-color: var(--background-main) !important;
 }

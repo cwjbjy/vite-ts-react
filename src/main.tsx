@@ -13,7 +13,7 @@ import router from './router';
 import './utils/observer';
 import './utils/i18';
 
-import '@/assets/styles/theme/index.css';
+import '@/assets/styles/index.css';
 
 //自己的npm包，数据埋点
 init({
