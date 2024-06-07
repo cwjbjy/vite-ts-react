@@ -12,12 +12,9 @@ import { getImage } from '@/apis/user';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
 
-import { ACCESS_TOKEN } from '@/settings/localStorage';
-import { USER_INFO } from '@/settings/localStorage';
+import { ACCESS_TOKEN, USER_INFO } from '@/settings/localStorage';
+import { baseURL, imgUrl } from '@/settings/user';
 import useFileStore from '@/store/file';
-
-const baseURL = import.meta.env.VITE_APP_AUTH_URL;
-const img_url = import.meta.env.VITE_APP_IMG_URL;
 
 const beforeUpload = (file: File) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -78,7 +75,7 @@ const FileUp = () => {
           onChange={handleChange}
           headers={{ authorization: `Bearer ${ls.get(ACCESS_TOKEN)}` }}
         >
-          {fileName ? <img src={`${img_url}${fileName}`} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+          {fileName ? <img src={`${imgUrl}${fileName}`} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
         </Upload>
         <p className="ant-upload-hint">只能上传jpg/png文件，且不超过2MB</p>
       </Card>

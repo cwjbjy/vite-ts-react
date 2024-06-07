@@ -12,7 +12,7 @@ import type { ThemeType } from '@/types';
 import type { MenuProps } from 'antd';
 
 import { LOGIN } from '@/settings/routerMap';
-import { GITHUB } from '@/settings/user';
+import { GITHUB, imgUrl } from '@/settings/user';
 import useFileStore from '@/store/file';
 import useThemeStore from '@/store/theme';
 
@@ -94,9 +94,7 @@ export default memo(function Header({ userName }: { userName: string }) {
         </Dropdown>
         <Dropdown menu={{ items: list, onClick: onUserClick }} className="user-drop">
           <div className="userImage">
-            {fileName && (
-              <img src={`${import.meta.env.VITE_APP_IMG_URL}${fileName}`} className="user-img" alt="加载失败" />
-            )}
+            {fileName && <img src={imgUrl + fileName} className="user-img" alt="加载失败" />}
             <span style={{ marginRight: 5 }}>
               <span style={{ marginRight: 2 }}>{userName}</span>
               <CaretDownOutlined />

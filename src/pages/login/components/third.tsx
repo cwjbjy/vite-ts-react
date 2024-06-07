@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { message } from 'antd';
 import styled from 'styled-components';
 
@@ -5,7 +7,7 @@ import QQ from '@/assets/images/login/QQ.png';
 import WB from '@/assets/images/login/wb.png';
 import WX from '@/assets/images/login/wx.png';
 
-const LoginOther = () => {
+export default memo(function LoginOther() {
   const thirdLogin = () => {
     message.warning({
       content: '功能未开发，请使用用户注册',
@@ -31,9 +33,7 @@ const LoginOther = () => {
       </div>
     </Wrapper>
   );
-};
-
-export default LoginOther;
+});
 
 const Wrapper = styled.div`
   .other-acc {

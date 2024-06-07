@@ -5,13 +5,14 @@ import { Table, Image, Button, Popconfirm } from 'antd';
 import styled from 'styled-components';
 
 import type { RowItem } from '@/types/userResponse';
+
+import { imgUrl } from '@/settings/user';
+
 interface Props {
   tableData: RowItem[];
   onModal({ isModalVisible, info }: { isModalVisible: boolean; info: RowItem }): void;
   onDelete(value: RowItem): void;
 }
-
-const img_url = import.meta.env.VITE_APP_IMG_URL;
 
 export default memo(function UserTable({ tableData, onModal, onDelete }: Props) {
   const onEdit = useCallback(
@@ -36,7 +37,7 @@ export default memo(function UserTable({ tableData, onModal, onDelete }: Props) 
         dataIndex: 'photo',
         key: 'photo',
         align: 'center',
-        render: (text: string) => <Image width={40} src={`${img_url}${text}`} />,
+        render: (text: string) => <Image width={40} src={imgUrl + text} />,
       },
       {
         title: '角色描述',

@@ -5,6 +5,7 @@ import { ls } from '@/utils/storage';
 import { CODE_TOKEN_EXPIRED } from '@/settings/code';
 import { ACCESS_TOKEN } from '@/settings/localStorage';
 import { LOGIN } from '@/settings/routerMap';
+import { baseURL } from '@/settings/user';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -13,8 +14,6 @@ interface Props {
   method: Method;
   params?: Record<string, any>;
 }
-
-const baseURL = import.meta.env.VITE_APP_AUTH_URL;
 
 class FetchClient {
   /**

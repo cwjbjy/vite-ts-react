@@ -9,6 +9,7 @@ import { ls } from '@/utils/storage';
 import showImage from '@/assets/images/chartRoom/chatShowV2.0.png';
 import rootImage from '@/assets/images/chartRoom/root.png';
 import { BUS_WS } from '@/settings/bus';
+import { imgUrl } from '@/settings/user';
 import useFileStore from '@/store/file';
 
 interface Message {
@@ -16,8 +17,6 @@ interface Message {
   image: string;
   text: string;
 }
-
-const img_url = import.meta.env.VITE_APP_IMG_URL;
 
 const ChatRoom = () => {
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
@@ -53,7 +52,7 @@ const ChatRoom = () => {
     const user = {
       type: 'setName',
       name: userName,
-      image: `${img_url}${fileName}`,
+      image: `${imgUrl}${fileName}`,
     };
     insService.open({
       params: user,
