@@ -1,13 +1,10 @@
 import 'antd/dist/reset.css';
 import './assets/icon/iconfont.css';
 
-import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import { TYPES, init } from 'cwj_monitoring';
 import ReactDOM from 'react-dom/client';
-
-import FullScreenLoading from '@/components/layout/loading';
 
 import router from './router';
 import './utils/observer';
@@ -25,8 +22,4 @@ init({
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  <Suspense fallback={<FullScreenLoading />}>
-    <RouterProvider router={router} />
-  </Suspense>,
-);
+root.render(<RouterProvider router={router} />);

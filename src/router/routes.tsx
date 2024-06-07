@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import AuthStatus from '@/components/authStatus';
 import ErrorBoundary from '@/components/errorBoundary';
 import LazyImportComponent from '@/components/lazyImportComponent';
 
@@ -8,6 +9,7 @@ import * as path from '../settings/routerMap';
 
 import chartRoutes from './chart';
 import dragRoutes from './drag';
+import { protectedLoader } from './loader';
 
 const routes = [
   {
@@ -15,9 +17,15 @@ const routes = [
     element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/login'))} />,
   },
   {
+    path: '/',
     element: <LazyImportComponent lazyChildren={lazy(() => import('@/layout'))} />,
+    loader: protectedLoader,
     errorElement: <ErrorBoundary />,
     children: [
+      {
+        index: true,
+        element: <Navigate to={path.FIRSTITEM} replace={true} />,
+      },
       {
         path: path.FIRSTITEM,
         element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/homePage'))} />,
@@ -56,18 +64,14 @@ const routes = [
       },
       {
         path: path.MANAGE,
-        element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/userManage'))} />,
+        element: (
+          <AuthStatus>
+            <LazyImportComponent lazyChildren={lazy(() => import('@/pages/userManage'))} />
+          </AuthStatus>
+        ),
       },
       ...chartRoutes,
       ...dragRoutes,
-      {
-        path: '/',
-        element: (
-          <>
-            <Navigate to={path.FIRSTITEM} replace={true} />
-          </>
-        ),
-      },
     ],
   },
   {

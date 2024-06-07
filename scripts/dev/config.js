@@ -13,4 +13,4 @@ export const routerPath = '../../src/router/dev.routerConfig.tsx';
 export const routerModuleConfig = fs
   .readdirSync(path.resolve(__dirname, '../../src/router'))
   .map((item) => item.replace(/(.*)\.[jt]sx?$/, '$1'))
-  .filter((file) => !['index', 'routes', 'dev.routerConfig'].includes(file));
+  .filter((file) => !['index', 'routes', 'dev.routerConfig', 'loader'].includes(file));

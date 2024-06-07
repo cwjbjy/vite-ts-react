@@ -1,12 +1,9 @@
 import { useMemo, useRef } from 'react';
-import { Suspense } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { useTitle } from 'ahooks';
 import { FloatButton } from 'antd';
 import styled from 'styled-components';
-
-import FullScreenLoading from '@/components/layout/loading';
 
 import { ls } from '@/utils/storage';
 
@@ -15,8 +12,6 @@ import { menus } from './components/menus/config';
 import Menus from './components/menus/index';
 
 import useVersion from '@/hooks/useVersion';
-import { ACCESS_TOKEN } from '@/settings/localStorage';
-import { LOGIN } from '@/settings/routerMap';
 
 const AppHome = () => {
   useTitle('react管理系统');
@@ -37,10 +32,6 @@ const AppHome = () => {
     });
   }, []);
 
-  if (!ls.get(ACCESS_TOKEN)) {
-    return <Navigate to={LOGIN} replace />;
-  }
-
   return (
     <Layout>
       <FloatButton.BackTop visibilityHeight={100} target={() => overFlowRef.current!} />
@@ -50,9 +41,7 @@ const AppHome = () => {
           <Menus menus={newMenus} />
         </aside>
         <article ref={overFlowRef}>
-          <Suspense fallback={<FullScreenLoading />}>
-            <Outlet />
-          </Suspense>
+          <Outlet />
         </article>
       </main>
     </Layout>

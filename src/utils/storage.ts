@@ -19,7 +19,11 @@ class MyStorage {
   get(key: string) {
     const value = this.storage.getItem(key);
     if (value) {
-      return JSON.parse(value);
+      try {
+        return JSON.parse(value);
+      } catch {
+        return value;
+      }
     }
   }
 
