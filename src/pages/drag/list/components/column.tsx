@@ -12,7 +12,7 @@ interface Props {
   tasks: any;
 }
 
-const Column = memo(function Column({ column, tasks }: Props) {
+export default memo(function Column({ column, tasks }: Props) {
   return (
     <Continer>
       <div className="title">{column.title}</div>
@@ -35,8 +35,6 @@ const Column = memo(function Column({ column, tasks }: Props) {
     </Continer>
   );
 });
-
-export default Column;
 
 const Continer = styled.div`
   margin: 8px;

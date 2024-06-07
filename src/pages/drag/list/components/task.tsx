@@ -8,7 +8,7 @@ interface Props {
   index: number;
 }
 
-const Task = memo(function Task({ task, index }: Props) {
+export default memo(function Task({ task, index }: Props) {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided: any, snapshot: any) => (
@@ -26,5 +26,3 @@ const Task = memo(function Task({ task, index }: Props) {
     </Draggable>
   );
 });
-
-export default Task;

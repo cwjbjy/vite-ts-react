@@ -7,7 +7,7 @@ import type { EchartsProps } from '@/types';
 import useResize from '@/hooks/useResize';
 import { themeColor } from '@/settings/theme';
 
-const Line = memo(function Line({ theme }: EchartsProps) {
+export default memo(function Line({ theme }: EchartsProps) {
   const echart = useRef(null);
 
   useResize(echart);
@@ -128,5 +128,3 @@ const Line = memo(function Line({ theme }: EchartsProps) {
 
   return <Chart ref={echart}></Chart>;
 });
-
-export default Line;

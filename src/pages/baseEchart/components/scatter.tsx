@@ -52,7 +52,7 @@ const data = [
   ],
 ];
 
-const Scatter = memo(function Scatter({ theme }: EchartsProps) {
+export default memo(function Scatter({ theme }: EchartsProps) {
   const echart = useRef(null);
 
   useResize(echart);
@@ -204,5 +204,3 @@ const Scatter = memo(function Scatter({ theme }: EchartsProps) {
 
   return <Chart ref={echart}></Chart>;
 });
-
-export default Scatter;

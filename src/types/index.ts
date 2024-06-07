@@ -1,10 +1,3 @@
-//消息
-export interface Message {
-  name: string;
-  image: string;
-  text: string;
-}
-
 //用户信息
 export interface UserInfo {
   flag?: boolean;

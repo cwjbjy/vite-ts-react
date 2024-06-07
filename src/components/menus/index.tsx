@@ -14,7 +14,7 @@ interface Props {
 
 const rootSubmenuKeys = ['drag', 'flowChart'];
 
-const Menus = memo(function Menus({ menus }: Props) {
+export default memo(function Menus({ menus }: Props) {
   const location = useLocation();
   const navigation = useNavigate();
 
@@ -57,8 +57,6 @@ const Menus = memo(function Menus({ menus }: Props) {
     </Wrapper>
   );
 });
-
-export default Menus;
 
 const Wrapper = styled.div`
   .Menu {

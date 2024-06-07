@@ -7,7 +7,7 @@ import type { EchartsProps } from '@/types';
 import useResize from '@/hooks/useResize';
 import { themeColor } from '@/settings/theme';
 
-const Pie = memo(function Pie({ theme }: EchartsProps) {
+export default memo(function Pie({ theme }: EchartsProps) {
   const echart = useRef(null);
 
   useResize(echart);
@@ -79,5 +79,3 @@ const Pie = memo(function Pie({ theme }: EchartsProps) {
 
   return <Chart ref={echart}></Chart>;
 });
-
-export default Pie;

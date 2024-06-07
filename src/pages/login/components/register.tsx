@@ -27,7 +27,7 @@ const initialUserInfo = {
   authCode: '',
 };
 
-const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) {
+export default memo(function RegisterForm({ setUser, onRegister }: Props) {
   const [verifyCode, set_verifyCode] = useState<{ validate: (params: string) => boolean }>();
   const [userInfo, setUserInfo] = useState({ userName: '', passWord: '' });
 
@@ -148,5 +148,3 @@ const RegisterForm = memo(function RegisterForm({ setUser, onRegister }: Props) 
     </Form>
   );
 });
-
-export default RegisterForm;

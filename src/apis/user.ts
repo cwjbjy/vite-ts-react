@@ -1,13 +1,6 @@
 import HttpClient from '@/utils/fetch';
 
-import type {
-  LoginParams,
-  RegisterParams,
-  UserIdParams,
-  UpdateUserParams,
-  UserNameParams,
-  TrackParams,
-} from '../types/userParams';
+import type { LoginParams, RegisterParams, UpdateUserParams, UserNameParams, TrackParams } from '../types/userParams';
 import type { RowItem, UserImage, Login } from '../types/userResponse';
 
 import { Url } from '@/settings/url';
@@ -28,7 +21,7 @@ export const user = () => {
 };
 
 //删除普通用户
-export const deleteUser = (params: UserIdParams) => {
+export const deleteUser = (params: { id: number }) => {
   return HttpClient.delete(Url.DeleteUser, params);
 };
 

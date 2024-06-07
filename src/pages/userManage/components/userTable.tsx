@@ -13,7 +13,7 @@ interface Props {
 
 const img_url = import.meta.env.VITE_APP_IMG_URL;
 
-const UserTable = memo(function UserTable({ tableData, onModal, onDelete }: Props) {
+export default memo(function UserTable({ tableData, onModal, onDelete }: Props) {
   const onEdit = useCallback(
     (params: RowItem) => {
       onModal({
@@ -76,8 +76,6 @@ const UserTable = memo(function UserTable({ tableData, onModal, onDelete }: Prop
 
   return <MyTable bordered columns={columns} dataSource={tableData} rowKey={(record: any) => record.id} />;
 });
-
-export default UserTable;
 
 export const MyTable = styled(Table)`
   margin-top: 10px;

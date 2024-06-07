@@ -7,7 +7,7 @@ import type { EchartsProps } from '@/types';
 import useResize from '@/hooks/useResize';
 import { themeColor } from '@/settings/theme';
 
-const BarLine = memo(function BarLine({ theme }: EchartsProps) {
+export default memo(function BarLine({ theme }: EchartsProps) {
   const echart = useRef(null);
 
   const initial = useCallback(() => {
@@ -192,5 +192,3 @@ const BarLine = memo(function BarLine({ theme }: EchartsProps) {
 
   return <Chart ref={echart}></Chart>;
 });
-
-export default BarLine;

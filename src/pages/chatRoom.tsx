@@ -6,12 +6,16 @@ import styled from 'styled-components';
 import insService from '@/utils/chat';
 import { ls } from '@/utils/storage';
 
-import type { Message } from '@/types';
-
 import showImage from '@/assets/images/chartRoom/chatShowV2.0.png';
 import rootImage from '@/assets/images/chartRoom/root.png';
 import { BUS_WS } from '@/settings/bus';
 import useFileStore from '@/store/file';
+
+interface Message {
+  name: string;
+  image: string;
+  text: string;
+}
 
 const img_url = import.meta.env.VITE_APP_IMG_URL;
 

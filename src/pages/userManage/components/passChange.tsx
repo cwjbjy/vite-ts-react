@@ -6,7 +6,7 @@ interface Props {
   getPass(val: string): void;
 }
 
-const PassChange = memo(function PassChange({ getPass }: Props) {
+export default memo(function PassChange({ getPass }: Props) {
   const onPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     getPass(e.target.value);
   };
@@ -19,5 +19,3 @@ const PassChange = memo(function PassChange({ getPass }: Props) {
     </Form>
   );
 });
-
-export default PassChange;

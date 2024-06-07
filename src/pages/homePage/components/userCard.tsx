@@ -13,7 +13,7 @@ interface Props {
 
 const img_url = import.meta.env.VITE_APP_IMG_URL;
 
-const UserCard = memo(function UserCard({ userName = '一叶扁舟', registerTime = '2021-03-21', fileName = '' }: Props) {
+export default memo(function UserCard({ userName = '一叶扁舟', registerTime = '2021-03-21', fileName = '' }: Props) {
   const role = userName === MANAGE_NAME ? '管理员' : '普通用户';
 
   return (
@@ -39,8 +39,6 @@ const UserCard = memo(function UserCard({ userName = '一叶扁舟', registerTim
     </Wrapper>
   );
 });
-
-export default UserCard;
 
 const Wrapper = styled.div`
   .user {

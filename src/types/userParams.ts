@@ -10,15 +10,12 @@ export interface RegisterParams extends LoginParams {
   photo: string;
 }
 
-export interface UserIdParams {
-  id: number;
-}
-
 export interface UserNameParams {
   user_name: string;
 }
 
-export interface UpdateUserParams extends UserIdParams, UserNameParams {
+export interface UpdateUserParams extends UserNameParams {
+  id: number;
   password: string;
 }
 

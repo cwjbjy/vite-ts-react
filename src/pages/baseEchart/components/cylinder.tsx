@@ -7,7 +7,7 @@ import type { EchartsProps } from '@/types';
 import useResize from '@/hooks/useResize';
 import { themeColor } from '@/settings/theme';
 
-const Cylinder = memo(function Cylinder({ theme }: EchartsProps) {
+export default memo(function Cylinder({ theme }: EchartsProps) {
   const echart = useRef(null);
 
   useResize(echart);
@@ -152,5 +152,3 @@ const Cylinder = memo(function Cylinder({ theme }: EchartsProps) {
 
   return <Chart ref={echart}></Chart>;
 });
-
-export default Cylinder;

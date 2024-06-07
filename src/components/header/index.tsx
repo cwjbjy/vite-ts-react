@@ -46,7 +46,7 @@ const list: MenuProps['items'] = [
   },
 ];
 
-const Header = memo(function Header({ userName }: { userName: string }) {
+export default memo(function Header({ userName }: { userName: string }) {
   const { fileName, setFileName } = useFileStore();
   const { theme, changeTheme } = useThemeStore();
   const navigation = useNavigate();
@@ -107,8 +107,6 @@ const Header = memo(function Header({ userName }: { userName: string }) {
     </Wrapper>
   );
 });
-
-export default Header;
 
 const Wrapper = styled.header`
   display: flex;
