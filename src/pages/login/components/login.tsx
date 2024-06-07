@@ -13,8 +13,9 @@ import { login } from '@/apis/user';
 
 import type { UserInfo } from '@/types';
 
-import { CODE_NAME_PASS } from '@/settings/code';
+import { CODE_ERROR } from '@/settings/code';
 import { USER_MENU, ACCESS_TOKEN } from '@/settings/localStorage';
+import { FIRSTITEM } from '@/settings/routerMap';
 
 interface Props {
   setUser: Dispatch<React.SetStateAction<UserInfo>>;
@@ -41,10 +42,10 @@ const LoginForm = forwardRef(function LoginForm({ setUser, userInfo }: Props, re
     onSuccess: (res) => {
       ls.set(ACCESS_TOKEN, res.data.token);
       ls.set(USER_MENU, res.data.auth);
-      navigation('/firstItem');
+      navigation(FIRSTITEM);
     },
     onError: (error: Record<string, any>) => {
-      if (error.status === CODE_NAME_PASS) {
+      if (error.code === CODE_ERROR) {
         form.setFields([
           {
             name: 'passWord',
