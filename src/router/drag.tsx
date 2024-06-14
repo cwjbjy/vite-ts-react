@@ -1,17 +1,17 @@
 import { lazy } from 'react';
 
-import LazyImportComponent from '@/components/lazyImportComponent';
+import LazyComponent from '@/components/lazyComponent';
 
 import * as path from '../settings/routerMap';
 
 const dragRoutes = [
   {
     path: path.DRAG_LIST,
-    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/drag/list'))} />,
+    element: <LazyComponent lazyChildren={lazy(() => import('@/pages/drag/list'))} />,
   },
   {
     path: path.DRAG_DIALOG,
-    element: <LazyImportComponent lazyChildren={lazy(() => import('@/pages/drag/dialog'))} />,
+    element: <LazyComponent lazyChildren={lazy(() => import('@/pages/drag/dialog'))} />,
   },
 ];
 

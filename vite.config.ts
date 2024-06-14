@@ -22,7 +22,10 @@ export default () => {
           },
         ],
         {
-          apply: 'serve',
+          apply(config, { command }) {
+            // 开发环境，并且包含启动参数--moduleLoad
+            return command === 'serve' && process.argv.slice(3)?.join() === '--moduleLoad';
+          },
         },
       ),
       {

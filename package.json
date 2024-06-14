@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node ./scripts/dev/index.js && vite --host",
+    "dev": "vite --host",
+    "dev:m": "node ./scripts/dev/index.js && vite -- --moduleLoad",
     "build": "tsc && vite build",
     "ts": "tsc --noEmit",
     "lint": "eslint src --fix --ext .ts,.tsx,.js,.jsx --max-warnings 0",
