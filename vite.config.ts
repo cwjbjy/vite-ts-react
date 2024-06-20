@@ -1,6 +1,7 @@
 import path from 'path'; //这个path用到了上面安装的@types/node
 
 import react from '@vitejs/plugin-react';
+import minimist from 'minimist';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
@@ -23,8 +24,9 @@ export default () => {
         ],
         {
           apply(config, { command }) {
+            const { _ } = minimist(process.argv.slice(2));
             // 开发环境，并且包含启动参数--moduleLoad
-            return command === 'serve' && process.argv.slice(3)?.join() === '--moduleLoad';
+            return command === 'serve' && _.includes('--moduleLoad');
           },
         },
       ),
