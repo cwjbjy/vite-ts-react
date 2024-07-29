@@ -1,0 +1,19 @@
+[data-theme='blue'] {
+  /* 字体 */
+  --font-primary: #fff;
+  --font-highlight: #1890ff;
+  /* 布局 */
+  --background-header: #0678be;
+  --background-aside: #336ea9;
+  --background-main: #70a1ff;
+  /* 卡片颜色 */
+  --card-background: #fff;
+  --card-border: #e9eaec;
+  --card-font: #666;
+  /* 拖拽 */
+  --drag-background: #eff1f5;
+  /* 飞机背景 */
+  --fleet-background: rgb(6, 42, 88);
+  /*字体图标*/
+  --icon-font: #70a1ff;
+}

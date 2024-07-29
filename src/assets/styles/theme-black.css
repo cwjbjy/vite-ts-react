@@ -1,0 +1,19 @@
+[data-theme='black'] {
+  /* 字体 */
+  --font-primary: #fff;
+  --font-highlight: #434a50;
+  /* 布局 */
+  --background-header: #303030;
+  --background-aside: #303030;
+  --background-main: #393939;
+  /* 卡片颜色 */
+  --card-background: #303030;
+  --card-border: #393939;
+  --card-font: #fff;
+  /* 拖拽 */
+  --drag-background: #303030;
+  /* 飞机背景 */
+  --fleet-background: #393939;
+  /*字体图标*/
+  --icon-font: #635c5c;
+}
