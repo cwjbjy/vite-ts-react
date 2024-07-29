@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "ts": "tsc --noEmit",
     "lint": "eslint src --fix --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "commit": "cz"
   },
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
@@ -42,6 +43,8 @@
     "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-react": "^4.3.1",
     "add": "^2.0.6",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "ejs": "^3.1.10",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -65,5 +68,10 @@
       "npm run lint",
       "prettier --write"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
