@@ -1,30 +1,29 @@
-# React + TypeScript + Vite
+# 技术栈
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+前端框架：react 
 
-Currently, two official plugins are available:
+状态管理：zustand
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+路由管理：react-router-dom V6 
 
-## Expanding the ESLint configuration
+UI框架：antD 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+数据可视化工具：echarts 
 
-- Configure the top-level `parserOptions` property like this:
+通信：fetch，WebSocket
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+打包工具：vite
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 接口
+
+下载后台node服务 https://github.com/cwjbjy/express-api
+
+yarn
+
+yarn dev
+
+后台服务起来后，前端即可正常访问接口
+
+## 自动化部署
+
+Docker+Jenkins+WebHooks
