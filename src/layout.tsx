@@ -70,6 +70,19 @@ const Layout = styled.div`
     overflow: auto;
     height: inherit;
     background-color: var(--background-main);
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--background-main);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: rgb(190, 190, 190);
+    }
   }
 
   section {
