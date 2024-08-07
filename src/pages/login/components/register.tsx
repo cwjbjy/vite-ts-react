@@ -4,8 +4,8 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Form, Input, message } from 'antd';
 import CryptoJS from 'crypto-es';
-
-import { getTime, randomName } from '@/utils/share';
+import dayjs from 'dayjs';
+import { nanoid } from 'nanoid';
 
 import { register } from '@/apis/user';
 
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const initialUserInfo = {
-  reg_name: randomName('游客'),
+  reg_name: `user_${nanoid(6)}`,
   rge_pass: '',
   rge_passAgain: '',
   authCode: '',
@@ -65,7 +65,7 @@ export default memo(function RegisterForm({ setUser, onRegister }: Props) {
           userName: params.reg_name,
           passWord: CryptoJS.MD5(params.rge_pass).toString(),
           authority: 2,
-          createTime: getTime(),
+          createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
           photo: 'userlogo.png',
         };
         setUserInfo({ userName: params.reg_name, passWord: params.rge_pass });

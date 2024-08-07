@@ -1,6 +1,6 @@
 import { useEffect, RefObject } from 'react';
 
-import { debounce } from '@/utils/share';
+import { debounce } from 'lodash-es';
 
 export default function useResize(echartRef: RefObject<HTMLDivElement>) {
   const debounceAutoSize = debounce(() => {
