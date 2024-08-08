@@ -54,10 +54,7 @@ const ChatRoom = () => {
       name: userName,
       image: `${imgUrl}${fileName}`,
     };
-    insService.open({
-      params: user,
-      closeCallBack: () => setMessageHistory([]),
-    });
+    insService.open(user);
     setConnectFlag(true);
     setCloseFlag(false);
   };
@@ -66,6 +63,7 @@ const ChatRoom = () => {
     insService.close({
       type: 'close',
     });
+    setMessageHistory([]);
     setConnectFlag(false);
     setCloseFlag(true);
   };
