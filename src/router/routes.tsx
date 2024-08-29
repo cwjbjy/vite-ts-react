@@ -60,7 +60,7 @@ const routes = [
       },
       {
         path: path.CHARTROOM,
-        element: <LazyComponent lazyChildren={lazy(() => import('@/pages/chatRoom'))} />,
+        element: <LazyComponent lazyChildren={lazy(() => import('@/pages/chatRoomSocket'))} />,
       },
       {
         path: path.MANAGE,

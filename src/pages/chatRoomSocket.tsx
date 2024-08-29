@@ -1,9 +1,9 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 
 import { Button, message, Input, Card, Modal } from 'antd';
 import styled from 'styled-components';
 
-import insService from '@/utils/chat';
+import socket, { TYPE } from '@/utils/socket';
 import { ls } from '@/utils/storage';
 
 import showImage from '@/assets/images/chartRoom/chatShowV2.0.png';
@@ -18,8 +18,7 @@ interface Message {
   text: string;
 }
 
-/* 使用本地WebSocket示例 */
-const ChatRoom = () => {
+const ChatRoomSocket = () => {
   const [messageHistory, setMessageHistory] = useState<Message[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalImage, setIsModalImage] = useState(false);
@@ -27,12 +26,21 @@ const ChatRoom = () => {
   const [connectFlag, setConnectFlag] = useState(false);
   const [closeFlag, setCloseFlag] = useState(true);
   const [latestMessage, setLatestMessage] = useState();
+  const [firstConnect, setFirstConnect] = useState(true);
 
   const { fileName } = useFileStore();
 
-  const infoListRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const userName = ls.get('userInfo')?.userName;
+
+  const user = useMemo(
+    () => ({
+      name: userName,
+      image: `${imgUrl}${fileName}`,
+    }),
+    [fileName, userName],
+  );
 
   useEffect(() => {
     window.eventBus.on(BUS_WS, (data: any) => {
@@ -49,21 +57,26 @@ const ChatRoom = () => {
     }
   }, [latestMessage]);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messageHistory]);
+
   const connect = () => {
-    const user = {
-      type: 'setName',
-      name: userName,
-      image: `${imgUrl}${fileName}`,
-    };
-    insService.open(user);
+    socket.connect(user);
+    setConnectFlag(true);
+    setCloseFlag(false);
+    setFirstConnect(false);
+  };
+
+  const reconnect = () => {
+    socket.reconnect(user);
     setConnectFlag(true);
     setCloseFlag(false);
   };
 
   const close = () => {
-    insService.close({
-      type: 'close',
-    });
+    socket.sendMessage(TYPE.REMOVE);
+    socket.close();
     setMessageHistory([]);
     setConnectFlag(false);
     setCloseFlag(true);
@@ -75,8 +88,7 @@ const ChatRoom = () => {
       return;
     }
     if (input === '') return;
-    insService.sendMessage({
-      type: 'chat',
+    socket.sendMessage(TYPE.MESSAGE, {
       text: input,
     });
     setInput('');
@@ -86,7 +98,7 @@ const ChatRoom = () => {
     <Wrapper>
       <Card hoverable>
         <Header>
-          <Button type="primary" onClick={connect} disabled={connectFlag}>
+          <Button type="primary" onClick={firstConnect ? connect : reconnect} disabled={connectFlag}>
             📞 连接
           </Button>
           <Button type="primary" onClick={close} disabled={closeFlag}>
@@ -101,7 +113,7 @@ const ChatRoom = () => {
         </Header>
 
         <div className="chat">
-          <div className="chat-content" ref={infoListRef}>
+          <div className="chat-content">
             <div>
               {messageHistory.length > 0 &&
                 messageHistory.map((item, index) => (
@@ -122,6 +134,7 @@ const ChatRoom = () => {
                   </dl>
                 ))}
             </div>
+            <div ref={messagesEndRef} />
           </div>
           <div className="chart-button">
             <Input placeholder="请输入" value={input} onChange={(e) => setInput(e.target.value)} onPressEnter={send} />
@@ -151,7 +164,7 @@ const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+export default ChatRoomSocket;
 
 const Header = styled.div`
   margin-bottom: 20px;
@@ -223,6 +236,19 @@ const Wrapper = styled.div`
         position: absolute;
         top: 0;
       }
+    }
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--background-main);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: rgb(190, 190, 190);
     }
   }
   .headPortrait {
