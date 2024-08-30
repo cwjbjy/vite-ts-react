@@ -65,7 +65,7 @@ export default memo(function RegisterForm({ setUser, onRegister }: Props) {
           userName: params.reg_name,
           passWord: CryptoJS.MD5(params.rge_pass).toString(),
           authority: 2,
-          createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          createTime: dayjs().format('YYYY-MM-DD'),
           photo: 'userlogo.png',
         };
         setUserInfo({ userName: params.reg_name, passWord: params.rge_pass });
