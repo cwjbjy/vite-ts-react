@@ -11,24 +11,20 @@ import { user, updateUser, deleteUser } from '@/apis/user';
 import PassChange from './components/passChange';
 import UserTable from './components/userTable';
 
+import type { UserInfo } from '@/types/userParams';
 import type { RowItem } from '@/types/userResponse';
 
 import { USER_INFO } from '@/settings/localStorage';
 import { MANAGE_NAME } from '@/settings/user';
 
-interface Info {
-  id: number;
-  user_name: string;
-}
-
 const UserManage = () => {
-  const [info, setInfo] = useState<Info>();
+  const [info, setInfo] = useState<UserInfo>();
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState('');
   const [tableData, setTableData] = useState<RowItem[]>([]);
   const userName = ls.get('userInfo')?.userName;
 
-  const onModal = useCallback(({ isModalVisible, info }: { isModalVisible: boolean; info: Info }) => {
+  const onModal = useCallback(({ isModalVisible, info }: { isModalVisible: boolean; info: UserInfo }) => {
     setModal(isModalVisible);
     setInfo(info);
   }, []);
@@ -46,8 +42,8 @@ const UserManage = () => {
         content: '密码修改成功',
       });
       ls.set(USER_INFO, {
-        userName: info?.user_name,
-        passWord: password,
+        userName: info?.userName,
+        password,
         flag: true,
       });
     },
@@ -72,10 +68,10 @@ const UserManage = () => {
   );
 
   const handleOk = useCallback(() => {
-    const { id, user_name } = info as Info;
+    const { id, userName } = info as UserInfo;
     handleUpdate({
       id,
-      user_name,
+      userName,
       password: CryptoJS.MD5(password).toString(),
     });
     setModal(false);

@@ -29,8 +29,8 @@ export default memo(function UserTable({ tableData, onModal, onDelete }: Props) 
     () => [
       {
         title: '用户名',
-        dataIndex: 'user_name',
-        key: 'user_name',
+        dataIndex: 'userName',
+        key: 'userName',
       },
       {
         title: '单击图像可以放大',

@@ -33,17 +33,13 @@ const HomePage = () => {
 
   const userName = ls.get(USER_INFO)?.userName;
 
-  useRequest(
-    () =>
-      getUser({
-        user_name: userName,
-      }),
-    {
-      onSuccess: (res) => {
-        setCreateTime(res.data);
-      },
+  useRequest(getUser, {
+    ready: !!userName,
+    defaultParams: [{ userName }],
+    onSuccess: (res) => {
+      setCreateTime(res.data);
     },
-  );
+  });
 
   return (
     <Wrapper>

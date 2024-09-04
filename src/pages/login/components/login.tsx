@@ -12,6 +12,7 @@ import { ls } from '@/utils/storage';
 import { login } from '@/apis/user';
 
 import type { UserInfo } from '@/types';
+import type { LoginParams } from '@/types/userParams';
 
 import { CODE_ERROR } from '@/settings/code';
 import { USER_MENU, ACCESS_TOKEN } from '@/settings/localStorage';
@@ -28,7 +29,7 @@ const icon = {
 
 const LoginForm = forwardRef(function LoginForm({ setUser, userInfo }: Props, ref) {
   useImperativeHandle(ref, () => ({
-    login: (params: { userName: string; passWord: string }) => {
+    login: (params: LoginParams) => {
       run(params);
     },
   }));
@@ -48,7 +49,7 @@ const LoginForm = forwardRef(function LoginForm({ setUser, userInfo }: Props, re
       if (error.code === CODE_ERROR) {
         form.setFields([
           {
-            name: 'passWord',
+            name: 'password',
             errors: ['用户名或密码错误'],
           },
         ]);
@@ -63,11 +64,11 @@ const LoginForm = forwardRef(function LoginForm({ setUser, userInfo }: Props, re
   });
 
   const onFinish = (params: UserInfo) => {
-    const { userName, passWord } = params;
+    const { userName, password } = params;
     setUser(params);
     run({
       userName,
-      passWord: CryptoJS.MD5(passWord).toString(),
+      password: CryptoJS.MD5(password).toString(),
     });
   };
 
@@ -90,7 +91,7 @@ const LoginForm = forwardRef(function LoginForm({ setUser, userInfo }: Props, re
       </Form.Item>
 
       <Form.Item
-        name="passWord"
+        name="password"
         rules={[
           {
             required: true,

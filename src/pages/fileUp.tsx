@@ -53,7 +53,7 @@ const FileUp = () => {
       return;
     }
     if (info.file.status === 'done') {
-      run({ user_name: userName });
+      run({ userName });
       setLoading(false);
     }
   };
@@ -66,7 +66,7 @@ const FileUp = () => {
         </p>
         <Upload
           name="file"
-          data={{ user_name: userName }}
+          data={{ userName }}
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}

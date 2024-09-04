@@ -51,8 +51,9 @@ export default memo(function Header({ userName }: { userName: string }) {
   const { theme, changeTheme } = useThemeStore();
   const navigation = useNavigate();
 
-  useRequest(() => getImage({ user_name: userName }), {
+  useRequest(getImage, {
     ready: !!userName,
+    defaultParams: [{ userName }],
     onSuccess: (res) => {
       setFileName(res.data[0].photo);
     },

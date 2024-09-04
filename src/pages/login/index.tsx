@@ -26,7 +26,7 @@ const Login = () => {
   useTitle('登录');
 
   const [userInfo, setUser] = useLocalStorageState<any>(USER_INFO, {
-    defaultValue: { userName: '一叶扁舟', passWord: '123456zx' },
+    defaultValue: { userName: '一叶扁舟', password: '123456zx' },
   });
 
   const [isModal, setIsModal] = useState(false);
@@ -45,7 +45,7 @@ const Login = () => {
   const onRegister = useCallback((params: UserInfo) => {
     loginRef.current?.login({
       userName: params.userName,
-      passWord: params.passWord,
+      password: params.password,
     });
   }, []);
 

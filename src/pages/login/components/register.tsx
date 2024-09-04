@@ -29,7 +29,7 @@ const initialUserInfo = {
 
 export default memo(function RegisterForm({ setUser, onRegister }: Props) {
   const [verifyCode, set_verifyCode] = useState<{ validate: (params: string) => boolean }>();
-  const [userInfo, setUserInfo] = useState({ userName: '', passWord: '' });
+  const [userInfo, setUserInfo] = useState({ userName: '', password: '' });
 
   const { run } = useRequest(register, {
     manual: true,
@@ -41,7 +41,7 @@ export default memo(function RegisterForm({ setUser, onRegister }: Props) {
       });
       onRegister({
         userName: params[0].userName,
-        passWord: params[0].passWord,
+        password: params[0].password,
       });
     },
     onError: (error: Record<string, any>) => {
@@ -63,12 +63,12 @@ export default memo(function RegisterForm({ setUser, onRegister }: Props) {
       if (params.authCode && verifyCode?.validate(params.authCode)) {
         const user = {
           userName: params.reg_name,
-          passWord: CryptoJS.MD5(params.rge_pass).toString(),
+          password: CryptoJS.MD5(params.rge_pass).toString(),
           authority: 2,
           createTime: dayjs().format('YYYY-MM-DD'),
           photo: 'userlogo.png',
         };
-        setUserInfo({ userName: params.reg_name, passWord: params.rge_pass });
+        setUserInfo({ userName: params.reg_name, password: params.rge_pass });
         run(user);
       } else {
         message.error({
