@@ -16,13 +16,7 @@ UI框架：antD
 
 ## 接口
 
-下载后台node服务 https://github.com/cwjbjy/express-api
-
-yarn
-
-yarn dev
-
-后台服务起来后，前端即可正常访问接口
+node：https://github.com/cwjbjy/nest-app
 
 ## 自动化部署
 
