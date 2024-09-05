@@ -11,7 +11,7 @@ module.exports = {
     { value: 'rollback', name: '⏪回滚:  代码回退' },
     { value: 'addLog', name: '👨🏻‍💻添加log:  代码回退' },
   ],
-  scopes: [{ name: 'javascript' }, { name: 'typescript' }],
+  scopes: [{ name: '全局' }, { name: '页面' }],
   messages: {
     type: '选择一种你的提交类型:',
     scope: '选择一个scope (可选):',
