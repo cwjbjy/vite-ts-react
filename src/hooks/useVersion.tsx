@@ -3,34 +3,23 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useMemoizedFn } from 'ahooks';
 import { notification, Button } from 'antd';
 
-const getETag = async () => {
-  const response = await fetch(window.location.origin, {
-    method: 'HEAD',
-    cache: 'no-cache',
-  });
-  return response.headers.get('etag') || response.headers.get('last-modified');
-};
+import useCheckUpdateWorker, { ReflectMessageType } from '../utils/worker/checkUpdate/useCheckUpdateWorker';
 
-const useVersion = (delay = 30000) => {
-  const timer = useRef<string | number | NodeJS.Timeout | undefined>();
-  const uploadNotificationShow = useRef(false);
+const useVersion = () => {
+  const forbidUpdate = useRef(false);
   const versionRef = useRef<string>();
   const firstReqRef = useRef(true);
-
-  const close = useCallback(() => {
-    uploadNotificationShow.current = false;
-  }, []);
-
-  const onRefresh = useCallback(() => {
-    close();
-    // 刷新页面
-    window.location.reload();
-  }, [close]);
+  const { start, stop, getEtag, workerRef } = useCheckUpdateWorker(
+    new URL('../utils/worker/checkUpdate/checkUpdateWorker.js', import.meta.url),
+    {
+      name: 'updateModal',
+    },
+  );
 
   const openNotification = useCallback(() => {
-    uploadNotificationShow.current = true;
+    forbidUpdate.current = true;
     const btn = (
-      <Button type="primary" size="small" onClick={onRefresh}>
+      <Button type="primary" size="small" onClick={() => window.location.reload()}>
         确认更新
       </Button>
     );
@@ -39,45 +28,40 @@ const useVersion = (delay = 30000) => {
       description: '检测到系统当前版本已更新，请刷新后使用。',
       btn,
       duration: 0,
-      onClose: close,
+      onClose: () => (forbidUpdate.current = false),
     });
-  }, [close, onRefresh]);
+  }, []);
 
-  const getHash = useCallback(() => {
-    //开发环境不进行版本更新提示
-    // if (process.env.NODE_ENV === 'development') return;
-    if (!uploadNotificationShow.current) {
-      // 在 js 中请求首页地址，这样不会刷新界面，也不会跨域
-      getETag().then((etag) => {
-        if (etag) {
-          const version = versionRef.current;
-          if (!version) {
-            versionRef.current = etag;
-          } else if (version === etag) {
-            // eslint-disable-next-line no-console
-            console.log('最新版本');
-          } else {
-            // 版本更新，弹出提示
-            openNotification();
-          }
-        }
-      });
+  const handlePageUpdateCheck = useMemoizedFn((etag) => {
+    if (etag) {
+      const version = versionRef.current;
+      if (!version) {
+        versionRef.current = etag;
+      } else if (version === etag) {
+        // eslint-disable-next-line no-console
+        console.log('最新版本');
+      } else {
+        // 版本更新，弹出提示，forbidUpdate防止重复弹出
+        !forbidUpdate.current && openNotification();
+      }
     }
-  }, [openNotification]);
+  });
 
   //开启检测
   const startPollingPageUpdate = useMemoizedFn(() => {
+    //开发环境不进行版本更新提示
+    // if (process.env.NODE_ENV === 'development') return;
     //第一次立即执行
     if (firstReqRef.current) {
       firstReqRef.current = false;
-      getHash();
+      getEtag();
     }
     stopPollingPageUpdate();
-    timer.current = setInterval(getHash, delay);
+    start();
   });
 
   const stopPollingPageUpdate = useMemoizedFn(() => {
-    clearInterval(timer.current);
+    stop();
   });
 
   const handleVisibilitychange = useMemoizedFn(() => {
@@ -97,6 +81,21 @@ const useVersion = (delay = 30000) => {
       document.removeEventListener('visibilitychange', handleVisibilitychange);
     };
   }, [handleVisibilitychange, startPollingPageUpdate]);
+
+  useEffect(() => {
+    if (workerRef.current) {
+      workerRef.current.port.onmessage = (e) => {
+        const data = e.data || {};
+        switch (data.type) {
+          case ReflectMessageType.REFLECT_GET_ETAG:
+            handlePageUpdateCheck(data.data);
+            break;
+          default:
+            break;
+        }
+      };
+    }
+  }, [handlePageUpdateCheck, workerRef]);
 };
 
 export default useVersion;
