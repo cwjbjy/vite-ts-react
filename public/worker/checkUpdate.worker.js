@@ -31,7 +31,7 @@ onconnect = function (e) {
               data: etag,
             });
           });
-        }, 3000);
+        }, 30000);
         break;
       case 'stop': //停止轮询
         visiblePorts.shift();

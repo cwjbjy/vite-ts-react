@@ -9,12 +9,10 @@ const useVersion = () => {
   const forbidUpdate = useRef(false);
   const versionRef = useRef<string>();
   const firstReqRef = useRef(true);
-  const { start, stop, getEtag, workerRef } = useCheckUpdateWorker(
-    new URL('../utils/worker/checkUpdate/checkUpdateWorker.js', import.meta.url),
-    {
-      name: 'updateModal',
-    },
-  );
+  const { start, stop, getEtag, workerRef } = useCheckUpdateWorker('/worker/checkUpdate.worker.js', {
+    name: 'updateModal',
+    type: 'module',
+  });
 
   const openNotification = useCallback(() => {
     forbidUpdate.current = true;

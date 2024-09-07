@@ -19,7 +19,7 @@ export enum ReflectMessageType {
 }
 
 // 用户消息推送Websocket连接
-export default function useSharedWorker(url: URL, options: WorkerOptions) {
+export default function useSharedWorker(url: string, options: WorkerOptions) {
   const workerRef = useRef<SharedWorker>();
 
   const sendMessage = useMemoizedFn((type: MessageType, data?: any) => {
