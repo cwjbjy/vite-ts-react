@@ -1,64 +1,57 @@
-import { useEffect, useRef } from 'react';
-
-import { useMemoizedFn } from 'ahooks';
-
-import { sharedWorkerInstance } from '../sharedWorkerInstance';
+import { useEffect, useRef, useCallback } from 'react';
 
 //发送消息的类型
 enum MessageType {
-  INIT = 'init', //初始化，用于传参
   START = 'start', //开启轮询，检测Etag版本
   STOP = 'stop', //停止轮询
   CLOSE = 'close', //关闭或刷新页面时，关闭SharedWorker的端口
+  REFRESH = 'refresh', //主动刷新
 }
 
 //SharedWorker接收到MessageType类型事件后，处理后对应的事件返回，以reflect开头
 export enum ReflectMessageType {
   REFLECT_GET_ETAG = 'reflectGetEtag',
+  REFLECT_REFRESH = 'reflectRefresh',
 }
 
 // 用户消息推送Websocket连接
 export default function useSharedWorker(url: string, options: WorkerOptions) {
   const workerRef = useRef<SharedWorker>();
 
-  const sendMessage = useMemoizedFn((type: MessageType, data?: any) => {
+  const sendMessage = useCallback((type: MessageType, data?: any) => {
     workerRef.current?.port.postMessage({
       type,
       ...data,
     });
-  });
+  }, []);
 
-  const init = useMemoizedFn(() => {
-    sendMessage(MessageType.INIT);
-  });
-
-  const start = useMemoizedFn(() => {
+  const start = useCallback(() => {
     sendMessage(MessageType.START);
-  });
+  }, [sendMessage]);
 
-  const stop = useMemoizedFn(() => {
+  const stop = useCallback(() => {
     sendMessage(MessageType.STOP);
-  });
+  }, [sendMessage]);
 
-  const close = useMemoizedFn(() => {
+  const close = useCallback(() => {
     sendMessage(MessageType.CLOSE);
-  });
+  }, [sendMessage]);
+
+  const refresh = useCallback(() => {
+    sendMessage(MessageType.REFRESH);
+  }, [sendMessage]);
 
   useEffect(() => {
     if (!workerRef.current) {
-      workerRef.current = sharedWorkerInstance(url, options);
-      init();
+      workerRef.current = new SharedWorker(url, options);
     }
 
-    window.addEventListener('beforeunload', close, false);
-
-    window.addEventListener('unload', close);
+    window.addEventListener('beforeunload', close);
 
     return () => {
       window.removeEventListener('beforeunload', close);
-      window.removeEventListener('unload', close);
     };
-  }, [close, init, options, url]);
+  }, [close, options, url]);
 
-  return { start, stop, init, workerRef };
+  return { start, stop, refresh, workerRef };
 }
