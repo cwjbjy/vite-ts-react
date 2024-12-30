@@ -18,7 +18,7 @@
     "ahooks": "^3.8.0",
     "antd": "^5.19.3",
     "crypto-es": "^2.1.0",
-    "cwj_monitoring": "^0.0.15",
+    "cwj_monitoring": "^0.0.18",
     "dayjs": "^1.11.12",
     "i18next": "^23.12.2",
     "i18next-browser-languagedetector": "^8.0.0",
