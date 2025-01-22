@@ -43,10 +43,6 @@ const routes = [
         element: <LazyComponent lazyChildren={lazy(() => import('@/pages/pdf'))} />,
       },
       {
-        path: path.BASE_ECHARTS,
-        element: <LazyComponent lazyChildren={lazy(() => import('@/pages/baseEchart'))} />,
-      },
-      {
         path: path.BASE_TABLE,
         element: <LazyComponent lazyChildren={lazy(() => import('@/pages/baseTable'))} />,
       },

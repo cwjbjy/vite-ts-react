@@ -28,11 +28,6 @@ export const menus: MenuItem[] = [
     icon: <img src={getAssetsFile('menus/pdf.png')} alt="加载失败" className="menuIcon"></img>,
   },
   {
-    label: '基础图表',
-    key: path.BASE_ECHARTS,
-    icon: <img src={getAssetsFile('menus/echarts.png')} alt="加载失败" className="menuIcon"></img>,
-  },
-  {
     label: '基础表格',
     key: path.BASE_TABLE,
     icon: <img src={getAssetsFile('menus/baseTable.png')} alt="加载失败" className="menuIcon"></img>,
@@ -84,7 +79,7 @@ export const menus: MenuItem[] = [
   {
     label: '智能对话',
     key: path.OPENAI,
-    icon: <img src={getAssetsFile('menus/chat.png')} alt="加载失败" className="menuIcon"></img>,
+    icon: <img src={getAssetsFile('menus/echarts.png')} alt="加载失败" className="menuIcon"></img>,
   },
   {
     label: '聊天室',

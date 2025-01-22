@@ -7,13 +7,21 @@ import type { EchartsProps } from '@/types';
 import useResize from '@/hooks/useResize';
 import { themeColor } from '@/settings/theme';
 
+import { BarChart, LineChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, TitleComponent, LegendComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+
+// 注册必须的组件
+echarts.use([GridComponent, TooltipComponent, TitleComponent, LegendComponent, LineChart, BarChart, CanvasRenderer]);
+
 export default memo(function BarLine({ theme }: EchartsProps) {
   const echart = useRef(null);
 
   const initial = useCallback(() => {
-    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
+    let echartsInstance = echarts.getInstanceByDom(echart.current as unknown as HTMLDivElement);
     if (!echartsInstance) {
-      echartsInstance = window.echarts.init(echart.current);
+      echartsInstance = echarts.init(echart.current);
     }
     echartsInstance.clear();
     echartsInstance.setOption({

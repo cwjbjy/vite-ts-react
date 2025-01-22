@@ -2,10 +2,14 @@ import { useEffect, RefObject } from 'react';
 
 import { debounce } from 'lodash-es';
 
+import * as echarts from 'echarts/core';
+
 export default function useResize(echartRef: RefObject<HTMLDivElement>) {
   const debounceAutoSize = debounce(() => {
-    const echartsInstance = window.echarts?.getInstanceByDom(echartRef.current);
-    echartsInstance && echartsInstance.resize();
+    if (echartRef.current) {
+      const echartsInstance = echarts.getInstanceByDom(echartRef.current);
+      echartsInstance && echartsInstance.resize();
+    }
   }, 300);
 
   useEffect(() => {

@@ -3,6 +3,23 @@ import { useEffect, useRef } from 'react';
 import type { ApiData } from '@/settings/map';
 
 import { geoCoordMap, apiData } from '@/settings/map';
+import useResize from '@/hooks/useResize';
+import { ScatterChart, EffectScatterChart, LinesChart } from 'echarts/charts';
+import { TitleComponent, TooltipComponent, GeoComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
+import { UniversalTransition } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
+import geoJson from '@/assets/map/china.json';
+echarts.use([
+  TooltipComponent,
+  TitleComponent,
+  GeoComponent,
+  CanvasRenderer,
+  ScatterChart,
+  EffectScatterChart,
+  LinesChart,
+  UniversalTransition,
+]);
 
 const buildLines = function (data: ApiData, geoCoordMap: Record<any, number[]>) {
   const planePath =
@@ -39,12 +56,10 @@ const buildLines = function (data: ApiData, geoCoordMap: Record<any, number[]>) 
       delay: item.delay,
     },
     lineStyle: {
-      normal: {
-        color: color[index],
-        width: 2,
-        opacity: 0.5,
-        curveness: 0.2, //曲度
-      },
+      color: color[index],
+      width: 2,
+      opacity: 0.5,
+      curveness: 0.2, //曲度
     },
     data: [
       {
@@ -81,8 +96,10 @@ const FleetModel = () => {
   const echart = useRef(null);
 
   const initial = () => {
-    const myChart = window.echarts.init(echart.current);
+    const myChart = echarts.init(echart.current);
     myChart.clear();
+    //@ts-ignore
+    echarts.registerMap('china', { geoJSON: geoJson });
     myChart.setOption({
       title: {
         text: '模拟航线',
@@ -99,22 +116,20 @@ const FleetModel = () => {
         layoutSize: '128%',
         // layoutCenter:["39%","50%"],
         zoom: 1,
-        label: {
-          emphasis: {
+        emphasis: {
+          label: {
             show: false,
             color: '#fff',
+          },
+          itemStyle: {
+            areaColor: '#4499d0',
           },
         },
         roam: true, //平移缩放
         itemStyle: {
-          normal: {
-            areaColor: '#0045A0',
-            borderColor: '#00DFFF',
-            borderWidth: 2,
-          },
-          emphasis: {
-            areaColor: '#4499d0',
-          },
+          areaColor: '#0045A0',
+          borderColor: '#00DFFF',
+          borderWidth: 2,
         },
       },
       series: [
@@ -124,16 +139,12 @@ const FleetModel = () => {
           coordinateSystem: 'geo',
           zlevel: 1,
           label: {
-            normal: {
-              show: true,
-              position: 'right',
-              formatter: '{b}',
-            },
+            show: true,
+            position: 'right',
+            formatter: '{b}',
           },
           itemStyle: {
-            normal: {
-              color: '#fff',
-            },
+            color: '#fff',
           },
           //coordinateSystem:"geo"只会取数组的前两位当做点坐标数据
           data: convertData(apiData),
@@ -151,23 +162,20 @@ const FleetModel = () => {
             brushType: 'stroke',
           },
           label: {
-            normal: {
-              show: false,
-              position: 'left',
-              formatter: '{b}',
-            },
+            show: false,
+            position: 'left',
+            formatter: '{b}',
           },
           itemStyle: {
-            normal: {
-              color: 'rgba(102,204,255,0.9)',
-              shadowBlur: 10,
-              shadowColor: '#0ff7ee',
-            },
-            emphasis: {
+            color: 'rgba(102,204,255,0.9)',
+            shadowBlur: 10,
+            shadowColor: '#0ff7ee',
+          },
+          emphasis: {
+            itemStyle: {
               areaColor: '#2B91B7',
             },
           },
-          hoverAnimation: true,
           showEffectOn: 'render', //绘制完成后显示特效
           data: convertData(apiData),
           symbolSize: function (value: number[]) {
@@ -178,6 +186,8 @@ const FleetModel = () => {
       ],
     });
   };
+
+  useResize(echart);
 
   useEffect(() => {
     initial();

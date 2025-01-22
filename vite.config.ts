@@ -52,6 +52,7 @@ export default () => {
             react: ['react', 'react-dom', 'react-router-dom', 'zustand'],
             antd: ['antd', '@ant-design/icons'],
             i18: ['i18next', 'react-i18next'],
+            echarts: ['echarts'],
           },
         },
       },
