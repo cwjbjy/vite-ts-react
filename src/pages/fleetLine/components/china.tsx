@@ -1,15 +1,16 @@
 import { useEffect, useRef } from 'react';
 
-import type { ApiData } from '@/settings/map';
-
-import { geoCoordMap, apiData } from '@/settings/map';
-import useResize from '@/hooks/useResize';
 import { ScatterChart, EffectScatterChart, LinesChart } from 'echarts/charts';
 import { TitleComponent, TooltipComponent, GeoComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
 import { UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+
+import type { ApiData } from '@/settings/map';
+
 import geoJson from '@/assets/map/china.json';
+import useResize from '@/hooks/useResize';
+import { geoCoordMap, apiData } from '@/settings/map';
 echarts.use([
   TooltipComponent,
   TitleComponent,

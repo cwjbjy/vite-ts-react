@@ -1,16 +1,16 @@
 import { memo, useEffect, useRef, useCallback } from 'react';
 
+import { BarChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, TitleComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+
 import { Chart } from '@/components/layout/chart';
 
 import type { EchartsProps } from '@/types';
 
 import useResize from '@/hooks/useResize';
 import { themeColor } from '@/settings/theme';
-
-import { BarChart } from 'echarts/charts';
-import { GridComponent, TooltipComponent, TitleComponent } from 'echarts/components';
-import * as echarts from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
 
 // 注册必须的组件
 echarts.use([GridComponent, TooltipComponent, TitleComponent, BarChart, CanvasRenderer]);

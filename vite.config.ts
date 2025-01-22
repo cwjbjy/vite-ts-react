@@ -2,7 +2,7 @@ import path from 'path'; //这个path用到了上面安装的@types/node
 
 import react from '@vitejs/plugin-react';
 import minimist from 'minimist';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import replace from 'vite-plugin-filter-replace';
@@ -34,7 +34,7 @@ export default () => {
         ...viteCompression(),
         apply: 'build',
       },
-      visualizer({ open: true }),
+      // visualizer({ open: true }),
     ],
     //这里进行配置别名
     resolve: {
