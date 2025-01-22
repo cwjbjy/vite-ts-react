@@ -30,6 +30,8 @@ export const POSITION_CHART = '/positionChart';
 export const FLOD_CHART = '/foldChart';
 /** 放大镜 */
 export const MAGNIFYING = '/magnifying';
+/** 智能对话 */
+export const OPENAI = '/openai';
 /** 聊天室 */
 export const CHARTROOM = '/chatRoom';
 /** 后台管理 */

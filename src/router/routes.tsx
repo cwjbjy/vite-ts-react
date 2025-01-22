@@ -59,6 +59,10 @@ const routes = [
         element: <LazyComponent lazyChildren={lazy(() => import('@/pages/magnifying'))} />,
       },
       {
+        path: path.OPENAI,
+        element: <LazyComponent lazyChildren={lazy(() => import('@/pages/openai'))} />,
+      },
+      {
         path: path.CHARTROOM,
         element: <LazyComponent lazyChildren={lazy(() => import('@/pages/chatRoomSocket'))} />,
       },

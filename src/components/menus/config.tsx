@@ -82,6 +82,11 @@ export const menus: MenuItem[] = [
     icon: <img src={getAssetsFile('menus/magnifying.png')} alt="加载失败" className="menuIcon"></img>,
   },
   {
+    label: '智能对话',
+    key: path.OPENAI,
+    icon: <img src={getAssetsFile('menus/chat.png')} alt="加载失败" className="menuIcon"></img>,
+  },
+  {
     label: '聊天室',
     key: path.CHARTROOM,
     icon: <img src={getAssetsFile('menus/chat.png')} alt="加载失败" className="menuIcon"></img>,
