@@ -14,6 +14,10 @@ UI框架：antD
 
 打包工具：vite
 
+## 自定义第三方插件
+
+数据埋点：https://www.npmjs.com/package/cwj_monitoring
+
 ## 接口
 
 源码地址：https://github.com/cwjbjy/nest-app
